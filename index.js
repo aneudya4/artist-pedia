@@ -29,7 +29,7 @@ function fetchArtistInfo(artistName) {
     .then((JsonResponse) => {
       renderArtistInfo(JsonResponse);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => errorMessage(err));
 }
 
 function renderArtistInfo(artistInfo) {
@@ -40,8 +40,6 @@ function renderArtistInfo(artistInfo) {
     $('.nav').addClass('hide-nav');
     notResultsFound($('.artist-info'), 'Artist not found');
   } else {
-    isLoading();
-
     $('.artist-info').empty();
     $('.nav').removeClass('hide-nav');
     $('.albums-container').removeClass('hide-content');
@@ -60,6 +58,48 @@ function renderArtistInfo(artistInfo) {
            
            `;
     $('.artist-info').append(artistData);
+    fetchArtistAlbums(artists[0].strArtist);
+  }
+}
+
+function fetchArtistAlbums(artistName) {
+  const url = `https://theaudiodb.com/api/v1/json/1/searchalbum.php?s=${artistName}`;
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then((JsonResponse) => {
+      renderArtistAlbums(JsonResponse);
+    })
+    .catch((err) => errorMessage(err));
+}
+
+function renderArtistAlbums(albums) {
+  const { album } = albums;
+
+  if (!album) {
+    isLoading();
+    notResultsFound($('.albums-container'), 'Artist has no albums to show');
+  } else {
+    $('.albums-container').empty();
+    let imgPlaceholder =
+      'https://www.winksjewelry.com/wp-content/themes/winks/media/product-placeholder.jpg';
+    for (let i = 0; i < album.length; i++) {
+      const albumElement = `
+             <div class='album-img'>
+                <img src=${album[i].strAlbumThumb || imgPlaceholder}> 
+                <p>${album[i].strAlbumStripped} <span>${
+        album[i].intYearReleased
+      }</span></p>
+        
+             </div>
+            `;
+      $('.albums-container').append(albumElement);
+    }
+    isLoading();
   }
 }
 
