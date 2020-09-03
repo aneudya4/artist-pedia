@@ -54,7 +54,7 @@ button {
 
 .landing {
   height: 100vh;
-  background: url('./assets/landing.jpeg');
+  background-image: url('./assets/landing.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -78,7 +78,6 @@ button {
   display: none;
   margin: 0 auto;
   margin-top: 90px;
-  /* max-width: 1200px; */
 }
 
 .artist-info {
