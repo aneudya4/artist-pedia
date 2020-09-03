@@ -54,7 +54,7 @@ button {
 
 .landing {
   height: 100vh;
-  background-image: url('./assets/landing.jpeg');
+  background-image: url('./assets/landing.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -62,10 +62,11 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: black;
+}
+
+.app-desc {
   color: white;
-  -o-background-size: cover;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
 }
 
 .app-desc h2 {
