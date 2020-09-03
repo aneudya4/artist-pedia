@@ -63,6 +63,9 @@ button {
   align-items: center;
   justify-content: center;
   color: white;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
 }
 
 .app-desc h2 {
