@@ -40,13 +40,16 @@ input {
   padding: 10px;
   width: 300px;
   border-radius: 20px;
+  outline: none;
 }
 button {
   padding: 10px;
+  outline: none;
   border-radius: 5px;
   background: tomato;
   color: white;
   border: 0;
+  cursor: pointer;
 }
 
 .landing {
@@ -75,7 +78,7 @@ button {
   display: none;
   margin: 0 auto;
   margin-top: 90px;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 }
 
 .artist-info {
@@ -140,9 +143,11 @@ button {
 }
 
 .albums-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  padding: 40px;
+  padding: 0px;
   text-align: center;
 }
 .album-img {
@@ -206,18 +211,8 @@ button {
   display: none;
 }
 
-.events-container .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  margin: 20% auto;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-}
-
 .events-container {
+  max-width: 1200px;
   text-align: center;
   margin: 0 auto;
   color: black;

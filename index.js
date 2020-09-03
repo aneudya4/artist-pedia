@@ -17,15 +17,15 @@ function isLoading() {
   $('.events').removeClass('selected-view');
   $('.albums').addClass('selected-view');
   $('.loader').toggleClass('show-loader');
-  $('.artist-details').toggleClass('show-loader');
+  $('.albums-container').show();
+  $('.events-container').hide();
   //   shows or hide loader
 }
 
 function fetchArtistInfo(artistName) {
   const url = `https://theaudiodb.com/api/v1/json/1/search.php?s=${artistName}`;
-  $('.artist-data').hide();
+  $('.artist-details').hide();
   $('.nav').hide();
-
   fetch(url)
     .then((response) => {
       if (response.ok) {
@@ -41,7 +41,7 @@ function fetchArtistInfo(artistName) {
 }
 
 function fetchArtistAlbums(artistName) {
-  $('.artist-data').hide();
+  $('.artist-details').hide();
   const url = `https://theaudiodb.com/api/v1/json/1/searchalbum.php?s=${artistName}`;
   fetch(url)
     .then((response) => {
@@ -53,12 +53,16 @@ function fetchArtistAlbums(artistName) {
     .then((JsonResponse) => {
       renderArtistAlbums(JsonResponse);
     })
-    .catch((err) => errorMessage(err));
+    .catch((err) => {
+      isLoading();
+      errorMessage(err);
+    });
 }
 
 function fetchArtistEvent(artistName) {
   $('.artist-details').hide();
   const url = config.ticketMasterBaseURL + artistName;
+
   fetch(url)
     .then((response) => {
       if (response.ok) {
@@ -70,7 +74,12 @@ function fetchArtistEvent(artistName) {
       isLoading();
       renderArtistEvents(responseJson._embedded);
     })
-    .catch((err) => errorMessage(err));
+    .catch((err) => {
+      $('.artist-data').hide();
+      // hiding the  data since albums takes longer to fetch  they were rendering after the function was done
+      // added a settimeout inside  the function
+      errorMessage();
+    });
 }
 
 function renderArtistInfo(artistInfo) {
@@ -82,7 +91,6 @@ function renderArtistInfo(artistInfo) {
     notResultsFound($('.artist-info'), 'Artist not found');
   } else {
     $('.artist-info').empty();
-    $('.artist-details').show();
     $('.nav').show();
 
     const bio = formatBioText(artists[0].strBiographyEN);
@@ -99,8 +107,6 @@ function renderArtistInfo(artistInfo) {
            
            `;
     $('.artist-info').append(artistData);
-    $('.albums-container').show();
-    $('.events-container').hide();
     fetchArtistAlbums(artists[0].strArtist);
     fetchArtistEvent(artists[0].strArtist);
   }
@@ -113,7 +119,6 @@ function formatBioText(text) {
 }
 function renderArtistEvents(allEvents) {
   $('.events-container ul').empty();
-  $('.artist-data').show();
   if (!allEvents) {
     isLoading();
     notResultsFound($('ul.artist-data'), 'Artist has no upcoming events');
@@ -141,12 +146,9 @@ function renderArtistAlbums(albums) {
 
   if (!album) {
     isLoading();
-    $('.artist-data').show();
     notResultsFound($('.albums-container'), 'Artist has no albums to show');
   } else {
     $('.albums-container').empty();
-    $('.artist-data').show();
-
     for (let i = 0; i < album.length; i++) {
       const img = album[i].strAlbumThumb || './assets/img-placeholder.jpg';
       const albumElement = `
@@ -193,16 +195,21 @@ function notResultsFound(parentElement, errMessage) {
 }
 
 function errorMessage() {
-  $('.artist-data').empty();
-  $('.artist-details').show();
+  $('.artist-details').find('.error-message').remove();
   $('.nav').hide();
-  isLoading();
-  $('.artist-details').append(`
-      <div class='error-message'>
-      <p>Something went wrong ,please try again later!</p>
-      <img src='./assets/error_message.svg'>
-      </div>
-      `);
+
+  setTimeout(() => {
+    isLoading();
+    $('.artist-data').empty();
+    $('.artist-details').show();
+    $('.nav').hide();
+    $('.artist-details').append(`
+        <div class='error-message'>
+        <p>Something went wrong ,please try again later!</p>
+        <img src='./assets/error_message.svg'>
+        </div>
+        `);
+  }, 1000);
 }
 
 $(watchForm);
