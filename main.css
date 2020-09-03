@@ -6,6 +6,11 @@
   box-sizing: border-box;
   font-family: 'Dosis', sans-serif;
 }
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+}
 
 a {
   color: black;
@@ -24,6 +29,7 @@ header {
   background: rgba(128, 128, 128, 0.356);
   position: fixed;
   width: 100%;
+  max-width: 1600px;
   top: 1px;
   z-index: 10;
 }
