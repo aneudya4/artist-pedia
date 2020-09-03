@@ -186,8 +186,8 @@ function notResultsFound(parentElement, errMessage) {
   $('.artist-data').show();
   isLoading();
   const notFoundImg = parentElement.hasClass('artist-info')
-    ? '/assets/not-found.svg'
-    : '/assets/no-data.svg';
+    ? './assets/not-found.svg'
+    : './assets/no-data.svg';
   parentElement.append(`<div class='no-results-found'>
           <p>${errMessage}</p>
           <img src=${notFoundImg}>
