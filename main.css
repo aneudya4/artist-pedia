@@ -9,7 +9,6 @@
 .container {
   max-width: 1600px;
   margin: 0 auto;
-  position: relative;
 }
 
 a {
@@ -60,7 +59,7 @@ button {
 
 .landing {
   height: 100vh;
-  background-image: url('./assets/landing.png');
+  background-image: url('./assets/landing-img.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
