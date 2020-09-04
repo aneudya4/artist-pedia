@@ -192,9 +192,9 @@ button:hover {
   width: 100%;
   opacity: 0;
   transition: 0.5s ease;
-  background-color: rgba(156, 155, 155, 0.568);
+  /* background-color: rgba(156, 155, 155, 0.568); */
 
-  /* background-color: rgba(254, 13, 0, 0.69); */
+  background-color: rgba(254, 13, 0, 0.69);
   z-index: 1;
 }
 
@@ -204,13 +204,13 @@ button:hover {
 .album-img:hover::after {
   opacity: 0.7;
 }
-@media(hover: hover) and (pointer: fine) {
+/* @media(hover: hover) and (pointer: fine) {
   .album-img:hover img {
     filter: grayscale(100%);
   }
   .album-img:hover::after {
     opacity: 0.7;
-}
+} */
 
 .album-img .album-title {
   position: absolute;
