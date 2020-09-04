@@ -196,19 +196,19 @@ button:hover {
   background-color: rgba(156, 155, 155, 0.568);
 }
 
-.album-img:hover img {
+/* .album-img:hover img {
   filter: grayscale(100%);
 }
 .album-img:hover::after {
   opacity: 0.7;
-}
-/* @media(hover: hover) and (pointer: fine) {
+} */
+@media(hover: hover) and (pointer: fine) {
   .album-img:hover img {
     filter: grayscale(100%);
   }
   .album-img:hover::after {
     opacity: 0.7;
-} */
+}
 
 .album-img .album-title {
   position: absolute;
@@ -328,9 +328,11 @@ li span {
 @media all and (min-width: 825px) {
   header {
     flex-direction: row;
-
     justify-content: space-between;
     max-width: 1600px;
+  }
+  .img-container {
+    width: 100%;
   }
   .artist-details {
     margin-top: 130px;
