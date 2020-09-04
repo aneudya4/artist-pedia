@@ -136,10 +136,6 @@ button:hover {
   width: 100%;
 }
 
-.show-loader {
-  display: none;
-}
-
 .nav {
   padding: 0 40px;
   margin: 10px auto;
@@ -158,10 +154,6 @@ button:hover {
   border-bottom: 3px solid tomato;
 }
 
-.hide-nav {
-  display: none;
-}
-
 .selected-view {
   color: tomato;
   border-bottom: 3px solid tomato;
@@ -174,6 +166,7 @@ button:hover {
   justify-content: center;
   padding: 0px;
   text-align: center;
+  flex-wrap: wrap;
 }
 .album-img {
   margin: 5px;
@@ -199,7 +192,9 @@ button:hover {
   width: 100%;
   opacity: 0;
   transition: 0.5s ease;
-  background-color: rgba(254, 13, 0, 0.69);
+  background-color: rgba(156, 155, 155, 0.568);
+
+  /* background-color: rgba(254, 13, 0, 0.69); */
   z-index: 1;
 }
 
@@ -208,6 +203,13 @@ button:hover {
 }
 .album-img:hover::after {
   opacity: 0.7;
+}
+@media(hover: hover) and (pointer: fine) {
+  .album-img:hover img {
+    filter: grayscale(100%);
+  }
+  .album-img:hover::after {
+    opacity: 0.7;
 }
 
 .album-img .album-title {
@@ -220,16 +222,19 @@ button:hover {
   transform: translate(-50%, -200%);
   transition: all 0.5s ease 0s;
   z-index: 10;
+}
+
+.album-title p {
+  background: tomato;
   color: white;
+  padding: 5px 10px;
+  width: fit-content;
+  margin: 5px auto;
 }
 
 .album-img:hover .album-title {
   opacity: 1;
   transform: translate(-50%, -50%);
-}
-
-.albums-container {
-  flex-wrap: wrap;
 }
 
 .hide-content {
@@ -292,9 +297,6 @@ li span {
 }
 
 .loader {
-  /* position: absolute;
-  top: 50%;
-  left: 50%; */
   margin: 40% auto;
   transform: translate(-50%, -50%);
   border: 16px solid #f3f3f3;

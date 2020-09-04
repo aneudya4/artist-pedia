@@ -16,7 +16,7 @@ function watchForm() {
 function isLoading() {
   $('.nav ul li').removeClass('selected-view');
   $('.albums').addClass('selected-view');
-  $('.loader').toggleClass('show-loader');
+  $('.loader').toggleClass('hide-content');
   $('.albums-container').show();
   $('.events-container').hide();
   //   shows or hide loader
@@ -156,7 +156,7 @@ function renderArtistAlbums(albums) {
                 <img src=${img}> 
                 <div class='album-title'>
                  <p>${album[i].strAlbumStripped} </p>
-                <span>Release Year:${album[i].intYearReleased}</span>
+                <p>Release Year:${album[i].intYearReleased}</p>
                 </div> 
         
              </div>
