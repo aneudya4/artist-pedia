@@ -16,7 +16,13 @@
               <label for="search-bar"></label>
               <input type="text" id="search-bar" placeholder="Ex:John Legend" required/>
               <button type="submit">Search Artist</button>
+
+              <div class='typeahead'>
+                <ul>
+               
+                </ul>
             </form>
+            </div>
           </header>
           <div class="loader show-loader"></div>
           <section class="landing">
@@ -26,9 +32,9 @@
                 Find Information about your favorite
                 <span>Artist</span>
               </h2>
-              <p>Artist bio</p>
-              <p>Albums</p>
-              <p>Upcoming events</p>
+              <p><span>Artist bio</span></p>
+              <p><span>Albums</span></p>
+              <p><span>Upcoming events</span></p>
             </div>
             </section>
     
@@ -37,9 +43,10 @@
             <div class="nav hide-nav">
                 <ul>
                   <li class="albums selected-view">Albums</li>
-                  <li class="events">Events</li>
+                  <li class="events">Events</li>   
                 </ul>
               </div>
+            
               <div class="albums-container artist-data"></div>
               <div class="events-container hide-content">
                 <ul class="artist-data"></ul>

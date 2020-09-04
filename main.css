@@ -19,34 +19,38 @@ a {
 a:visited {
   color: tomato;
 }
+ul {
+  list-style: none;
+}
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-direction: column;
   align-items: center;
   padding: 20px;
   background: rgba(128, 128, 128, 0.356);
   position: fixed;
   width: 100%;
-  max-width: 1600px;
   top: 1px;
-  z-index: 10;
+  z-index: 4;
 }
 header h1 {
   color: tomato;
+  margin: 5px;
 }
 
-header::after {
-  content: '';
-  display: block;
+form {
+  text-align: center;
 }
-
 input {
   padding: 10px;
   width: 300px;
-  border-radius: 20px;
+  border-radius: 10px;
   outline: none;
+  position: relative;
 }
+
 button {
   padding: 10px;
   outline: none;
@@ -55,6 +59,11 @@ button {
   color: white;
   border: 0;
   cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background: rgb(218, 86, 62);
 }
 
 .landing {
@@ -67,7 +76,6 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: black;
 }
 
 .app-desc {
@@ -76,33 +84,57 @@ button {
 
 .app-desc h2 {
   font-size: 40px;
+  background: rgba(255, 99, 71, 0.452);
+  padding: 5px;
 }
-
-.landing p {
+.app-desc p {
   display: inline-block;
   margin: 10px 10px;
+  padding: 5px;
+  background: tomato;
+  transition: background 0.3s;
+  transform: skew(-20deg);
+}
+.app-desc p span {
+  display: inline-block;
+  padding: 5px 10px;
+  transform: skew(20deg);
 }
 
 .artist-details {
   display: none;
   margin: 0 auto;
-  margin-top: 90px;
+  margin-top: 200px;
+  text-align: center;
 }
 
 .artist-info {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+
   max-width: 850px;
   margin: 20px auto;
   text-align: justify;
 }
 .img-container {
-  width: 400px;
-  margin-right: 20px;
+  max-width: 400px;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.bio {
+  text-align: justify;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.bio h2 {
+  text-align: center;
+  margin-bottom: 5px;
 }
 
 .img-container img {
-  width: 400px;
+  width: 100%;
 }
 
 .show-loader {
@@ -112,7 +144,7 @@ button {
 .nav {
   padding: 0 40px;
   margin: 10px auto;
-  border-bottom: 1px solid black;
+  border-bottom: 3px solid rgba(255, 0, 0, 0.123);
   width: calc(1200px- 80px);
 }
 .nav ul li {
@@ -124,6 +156,7 @@ button {
 .nav ul li:hover {
   color: tomato;
   cursor: pointer;
+  border-bottom: 3px solid tomato;
 }
 
 .hide-nav {
@@ -132,34 +165,20 @@ button {
 
 .selected-view {
   color: tomato;
-}
-
-.artist-info {
-  display: flex;
-  justify-content: space-around;
-  max-width: 850px;
-  margin: 20px auto;
-  text-align: justify;
-}
-.img-container {
-  width: 400px;
-  margin-right: 20px;
-}
-
-.img-container img {
-  width: 400px;
+  border-bottom: 3px solid tomato;
 }
 
 .albums-container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0px;
   text-align: center;
 }
 .album-img {
   margin: 5px;
+  flex-basis: 300px;
   text-align: center;
   position: relative;
 }
@@ -207,7 +226,8 @@ button {
 }
 
 .album-img img {
-  width: 300px;
+  width: 100%;
+  /* flex-basis: 400px; */
   object-fit: cover;
 }
 
@@ -223,20 +243,19 @@ button {
   max-width: 1200px;
   text-align: center;
   margin: 0 auto;
+
   color: black;
-  padding: 40px;
 }
 .events-container ul {
   list-style: none;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 0 auto;
 }
 
 .events-container ul li {
   border: 1px solid black;
-  margin: 5px;
-  flex-basis: 400px;
+  margin: 10px auto;
+  max-width: 400px;
 }
 li img {
   width: 100%;
@@ -301,5 +320,50 @@ li span {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media all and (min-width: 825px) {
+  header {
+    flex-direction: row;
+
+    justify-content: space-between;
+    max-width: 1600px;
+  }
+  .artist-details {
+    margin-top: 130px;
+  }
+  .artist-info {
+    flex-direction: row;
+  }
+
+  .albums-container {
+    justify-content: space-between;
+  }
+
+  .events-container ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: space-evenly;
+  }
+
+  .events-container ul li {
+    border: 1px solid black;
+    width: 400px;
+  }
+}
+
+@media all and (min-width: 1000px) {
+  header::after {
+    content: '';
+    display: block;
+  }
+  .artist-details {
+    text-align: left;
+  }
+  .album-img img {
+    width: 300px;
   }
 }

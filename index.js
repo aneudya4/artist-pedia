@@ -14,7 +14,7 @@ function watchForm() {
 }
 
 function isLoading() {
-  $('.events').removeClass('selected-view');
+  $('.nav ul li').removeClass('selected-view');
   $('.albums').addClass('selected-view');
   $('.loader').toggleClass('show-loader');
   $('.albums-container').show();
@@ -168,14 +168,12 @@ function renderArtistAlbums(albums) {
 
 function showHideAlbumsAndEvents() {
   $('.nav ul li').on('click', function () {
+    $('.nav ul li').removeClass('selected-view');
+    $(this).addClass('selected-view');
     if ($(this).hasClass('events')) {
-      $(this).addClass('selected-view');
-      $('.albums').removeClass('selected-view');
       $('.albums-container').hide();
       $('.events-container').show();
     } else {
-      $(this).addClass('selected-view');
-      $('.events').removeClass('selected-view');
       $('.albums-container').show();
       $('.events-container').hide();
     }
