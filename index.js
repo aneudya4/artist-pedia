@@ -104,12 +104,12 @@ function renderArtistInfo(artistInfo) {
            <p><i class="fas fa-headphones-alt"></i><span>Genre:${artists[0].strStyle}<span></p>
            <p><i class="far fa-address-book"></i>${bio}</p>
            <span>
-           <a target="_blank" href="www.${artists[0].strTwitter}">
+           <a target="_blank" href="http://${artists[0].strTwitter}">
            <i class="fab fa-twitter"></i>
            </a>
            </span>
            <span>
-           <a target="_blank" href=${artists[0].strWebsite}>
+           <a target="_blank" href="//${artists[0].strWebsite}">
            Website
            </a>
            </span>
