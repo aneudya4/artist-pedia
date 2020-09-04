@@ -95,14 +95,16 @@ function renderArtistInfo(artistInfo) {
 
     const bio = formatBioText(artists[0].strBiographyEN);
     const artistData = `
-          
            <div class='img-container'>
-              <img src=${artists[0].strArtistFanart}>
+              <img src=${artists[0].strArtistThumb} alt="${artists[0].strArtist}">
            </div>
-          
            <div class='bio'>
            <h2>${artists[0].strArtist}</h2>
-           <p>${bio}</p>
+           <p><i class="fas fa-map-marker-alt"></i>${artists[0].strCountry}</p>
+           <p><i class="fas fa-headphones-alt"></i><span>Genre:${artists[0].strStyle}<span></p>
+           <p><i class="far fa-address-book"></i>${bio}</p>
+           <span><a href=${artists[0].strTwitter} target='_blank'><i class="fab fa-twitter"></i></a></span>
+           <span><a href=${artists[0].strWebsite}>Website</a></span>
            </div>
            
            `;
@@ -118,6 +120,7 @@ function formatBioText(text) {
   return text.substring(0, secondIndex + 1);
 }
 function renderArtistEvents(allEvents) {
+  console.log(allEvents);
   $('.events-container ul').empty();
   if (!allEvents) {
     isLoading();
@@ -125,14 +128,22 @@ function renderArtistEvents(allEvents) {
   } else {
     const { events } = allEvents;
     for (let i = 0; i < events.length; i++) {
+      const { dates, images, name, url, _embedded } = events[i];
+      const date = new Date(dates.start.dateTime);
+      const formatDate = `${date.getUTCMonth()}/${date.getUTCDay()}/${date.getUTCFullYear()}`;
       const liElement = `
               <li>
-                  <span> Date:${events[i].dates.start.localDate} </span> 
-                  <img src=${events[i].images[0].url}>
-                      <span>${events[i].name}</span>
-                   <span><a href=${events[i].url}>Buy Tickets</a></span>  
-                   <span> Status:${events[i].dates.status.code} </span> 
-      
+                  <img src=${images[6].url} alt="${name}">
+                      <p>${name}</p>
+                      <p><a href=${url} target="_blank">Buy Tickets</a></p>
+                      <p>${_embedded.venues[0].name} </p> 
+                      <p>
+                      <span> ${_embedded.venues[0].city.name}</span> 
+                      <span> ${_embedded.venues[0].country.name}</span> 
+                      </p> 
+                   <p> Date: ${formatDate} </p> 
+                   <p> Status:${dates.status.code} </p> 
+                   
               </li>
               `;
       $('.events-container ul').append(liElement);
@@ -142,18 +153,18 @@ function renderArtistEvents(allEvents) {
 
 function renderArtistAlbums(albums) {
   const { album } = albums;
+  console.log(album);
   $('.artist-details').show();
-
   if (!album) {
     isLoading();
     notResultsFound($('.albums-container'), 'Artist has no albums to show');
   } else {
     $('.albums-container').empty();
     for (let i = 0; i < album.length; i++) {
-      const img = album[i].strAlbumThumb || './assets/img-placeholder.jpg';
+      const img = album[i].strAlbumThumb || './assets/img-placeholder.webp';
       const albumElement = `
              <div class='album-img'>
-                <img src=${img}> 
+                <img src=${img} alt="${album[i].strArtist}"> 
                 <div class='album-title'>
                  <p>${album[i].strAlbumStripped} </p>
                 <p>Release Year:${album[i].intYearReleased}</p>

@@ -6,6 +6,9 @@
   box-sizing: border-box;
   font-family: 'Dosis', sans-serif;
 }
+body {
+  background: #f7fafc;
+}
 .container {
   max-width: 1600px;
   margin: 0 auto;
@@ -17,7 +20,7 @@ a {
 }
 
 a:visited {
-  color: tomato;
+  color: blue;
 }
 ul {
   list-style: none;
@@ -29,14 +32,14 @@ header {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background: rgba(128, 128, 128, 0.356);
+  background: #c0c0c04b;
   position: fixed;
   width: 100%;
-  top: 1px;
+  top: -2px;
   z-index: 4;
 }
 header h1 {
-  color: tomato;
+  color: #e31c3d;
   margin: 5px;
 }
 
@@ -50,12 +53,22 @@ input {
   outline: none;
   position: relative;
 }
+label {
+  position: relative;
+}
+
+.fa-search {
+  position: absolute;
+  top: 1px;
+  right: 13px;
+  color: #e31c3d;
+}
 
 button {
   padding: 10px;
   outline: none;
   border-radius: 5px;
-  background: tomato;
+  background: #e31c3d;
   color: white;
   border: 0;
   cursor: pointer;
@@ -63,12 +76,12 @@ button {
 }
 
 button:hover {
-  background: rgb(218, 86, 62);
+  background: #b81b35;
 }
 
 .landing {
   height: 100vh;
-  background-image: url('./assets/landing-img.jpg');
+  background-image: url('./assets/landing-img.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -85,13 +98,15 @@ button:hover {
 .app-desc h2 {
   font-size: 40px;
   background: rgba(255, 99, 71, 0.452);
+  background: #e31c3d8f;
+
   padding: 5px;
 }
 .app-desc p {
   display: inline-block;
   margin: 10px 10px;
   padding: 5px;
-  background: tomato;
+  background: #e31c3d;
   transition: background 0.3s;
   transform: skew(-20deg);
 }
@@ -119,17 +134,37 @@ button:hover {
   max-width: 400px;
   object-fit: cover;
   margin: 0 auto;
+  padding: 15px;
 }
 
 .bio {
   text-align: justify;
-  padding: 20px;
+  padding: 15px;
   margin: 0 auto;
+}
+
+.bio p,
+.bio span {
+  margin: 10px 10px 10px 0;
+}
+
+.bio p i {
+  color: #e31c3d;
+  display: inline-block;
+  margin-right: 3px;
 }
 
 .bio h2 {
   text-align: center;
   margin-bottom: 5px;
+}
+
+.bio span a {
+  color: blue;
+}
+
+.bio span a i {
+  color: #00acee;
 }
 
 .img-container img {
@@ -149,14 +184,14 @@ button:hover {
 }
 
 .nav ul li:hover {
-  color: tomato;
+  color: #e31c3d;
   cursor: pointer;
-  border-bottom: 3px solid tomato;
+  border-bottom: 3px solid #a81900;
 }
 
 .selected-view {
-  color: tomato;
-  border-bottom: 3px solid tomato;
+  color: #a81900;
+  border-bottom: 3px solid #a81900;
 }
 
 .albums-container {
@@ -177,6 +212,7 @@ button:hover {
 }
 .album-img img {
   width: 100%;
+  border-radius: 7px;
   object-fit: cover;
 }
 .album-img::after {
@@ -196,18 +232,11 @@ button:hover {
   background-color: rgba(156, 155, 155, 0.568);
 }
 
-/* .album-img:hover img {
+.album-img:hover img {
   filter: grayscale(100%);
 }
 .album-img:hover::after {
   opacity: 0.7;
-} */
-@media(hover: hover) and (pointer: fine) {
-  .album-img:hover img {
-    filter: grayscale(100%);
-  }
-  .album-img:hover::after {
-    opacity: 0.7;
 }
 
 .album-img .album-title {
@@ -223,7 +252,7 @@ button:hover {
 }
 
 .album-title p {
-  background: tomato;
+  background: #e31c3d;
   color: white;
   padding: 5px 10px;
   width: fit-content;
@@ -243,7 +272,6 @@ button:hover {
   max-width: 1200px;
   text-align: center;
   margin: 0 auto;
-
   color: black;
 }
 .events-container ul {
@@ -253,15 +281,23 @@ button:hover {
 }
 
 .events-container ul li {
-  border: 1px solid black;
+  border: 1px solid rgba(150, 148, 148, 0.486);
   margin: 10px auto;
   max-width: 320px;
+  border-radius: 7px;
 }
-li img {
+.events-container li img {
   width: 100%;
+  border-top-right-radius: 5px;
+  object-fit: cover;
+  border-top-left-radius: 5px;
 }
-li span {
-  display: block;
+.events-container li p {
+  margin: 5px 0;
+}
+
+.events-container ul li a {
+  color: blue;
 }
 
 .no-results-found {
@@ -354,8 +390,8 @@ li span {
   }
 
   .events-container ul li {
-    border: 1px solid black;
     width: 400px;
+    color: #a81900;
   }
   .loader {
     margin: 0;
