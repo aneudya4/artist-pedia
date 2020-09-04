@@ -57,11 +57,16 @@ label {
   position: relative;
 }
 
+label span {
+  color: rgba(255, 255, 255, 0);
+}
+
 .fa-search {
+  color: #e31c3d;
   position: absolute;
   top: 1px;
-  right: 13px;
-  color: #e31c3d;
+  left: 365px;
+  z-index: 4;
 }
 
 button {

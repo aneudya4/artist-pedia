@@ -14,15 +14,14 @@
             </a>
             <form>
               <label for="search-bar">
-              <input type="text" id="search-bar" placeholder="Ex:John Legend " required/>
-              <i class="fas fa-search"></i>
+                <i class="fas fa-search"></i>
+                  <span> placeholder text</span>
+                  <!-- label was failing accessibility test , had to add text to make it pass -->
             </label>
+            <input type="text" id="search-bar" placeholder="Ex:John Legend " required/>
               <button type="submit">Search Artist</button>
-
               <div class='typeahead'>
-                <ul>
-               
-                </ul>
+                <ul></ul>
             </form>
             </div>
           </header>
