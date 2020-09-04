@@ -111,7 +111,6 @@ button:hover {
 .artist-info {
   display: flex;
   flex-direction: column;
-
   max-width: 850px;
   margin: 20px auto;
   text-align: justify;
@@ -182,6 +181,10 @@ button:hover {
   text-align: center;
   position: relative;
 }
+.album-img img {
+  width: 100%;
+  object-fit: cover;
+}
 .album-img::after {
   content: '';
   display: block;
@@ -225,12 +228,6 @@ button:hover {
   transform: translate(-50%, -50%);
 }
 
-.album-img img {
-  width: 100%;
-  /* flex-basis: 400px; */
-  object-fit: cover;
-}
-
 .albums-container {
   flex-wrap: wrap;
 }
@@ -255,7 +252,7 @@ button:hover {
 .events-container ul li {
   border: 1px solid black;
   margin: 10px auto;
-  max-width: 400px;
+  max-width: 320px;
 }
 li img {
   width: 100%;
@@ -267,6 +264,7 @@ li span {
 .no-results-found {
   text-align: center;
   width: 40%;
+  margin: 0 auto;
 }
 
 .no-results-found img {
@@ -294,12 +292,16 @@ li span {
 }
 
 .loader {
+  /* position: absolute;
+  top: 50%;
+  left: 50%; */
+  margin: 40% auto;
+  transform: translate(-50%, -50%);
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  margin: 20% auto;
+  width: 200px;
+  height: 200px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
@@ -352,6 +354,13 @@ li span {
   .events-container ul li {
     border: 1px solid black;
     width: 400px;
+  }
+  .loader {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
