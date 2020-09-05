@@ -61,6 +61,7 @@ label span {
   color: rgba(255, 255, 255, 0);
   display: inline-block;
   margin-right: -100px;
+  /* display: none; */
 }
 
 .fa-search {
@@ -336,6 +337,13 @@ button:hover {
     flex-direction: row;
     justify-content: space-between;
     max-width: 1600px;
+  }
+
+  label span {
+    margin-right: -20px;
+  }
+  .fa-search {
+    left: 345px;
   }
   .img-container {
     width: 100%;
