@@ -40,7 +40,7 @@ header {
 }
 header h1 {
   color: #e31c3d;
-  margin: 5px;
+  font-size: 35px;
 }
 
 form {
@@ -61,7 +61,6 @@ label span {
   color: rgba(255, 255, 255, 0);
   display: inline-block;
   margin-right: -100px;
-  /* display: none; */
 }
 
 .fa-search {
@@ -197,9 +196,10 @@ button:hover {
   border-bottom: 3px solid #a81900;
 }
 
-.selected-view {
+.nav ul li.selected-view {
   color: #a81900;
   border-bottom: 3px solid #a81900;
+  font-size: 25px;
 }
 
 .albums-container {
