@@ -177,7 +177,6 @@ function renderArtistAlbums(albums, artistName) {
     );
   } else {
     $('.albums-container').empty();
-
     for (let i = 0; i < albums.length; i++) {
       const img = albums[i].strAlbumThumb || './assets/img-placeholder.webp';
       const albumElement = `

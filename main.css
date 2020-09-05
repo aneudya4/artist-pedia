@@ -32,7 +32,7 @@ header {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background: #c0c0c04b;
+  background: #969595ce;
   position: fixed;
   width: 100%;
   top: -2px;
@@ -337,6 +337,9 @@ button:hover {
     flex-direction: row;
     justify-content: space-between;
     max-width: 1600px;
+  }
+  input {
+    font-size: 16px;
   }
 
   label span {
