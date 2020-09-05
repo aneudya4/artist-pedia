@@ -186,7 +186,7 @@ function renderArtistAlbums(albums, artistName) {
                 <div class='album-title'>
                  <p>${albums[i].strAlbumStripped} </p>
                 <p>Release Year:${
-                  albums[i].intYearReleased === 0
+                  albums[i].intYearReleased == 0
                     ? 'N/A'
                     : albums[i].intYearReleased
                 }</p>
