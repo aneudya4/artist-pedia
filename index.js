@@ -23,7 +23,7 @@ function isLoading() {
 }
 
 function fetchArtistInfo(artistName) {
-  const url = `https://theaudiodb.com/api/v1/json/1/search.php?s=${artistName}`;
+  const url = config.audiodbArtistBaseURL + artistName;
   $('.artist-details').hide();
   $('.nav').hide();
   fetch(url)
@@ -42,7 +42,7 @@ function fetchArtistInfo(artistName) {
 
 function fetchArtistAlbums(artistName) {
   $('.artist-details').hide();
-  const url = `https://theaudiodb.com/api/v1/json/1/searchalbum.php?s=${artistName}`;
+  const url = config.audioDbAlbumsBaseURL + artistName;
   fetch(url)
     .then((response) => {
       if (response.ok) {

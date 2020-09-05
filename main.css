@@ -52,6 +52,7 @@ input {
   border-radius: 10px;
   outline: none;
   position: relative;
+  font-size: 16px;
 }
 label {
   position: relative;
@@ -337,9 +338,6 @@ button:hover {
     flex-direction: row;
     justify-content: space-between;
     max-width: 1600px;
-  }
-  input {
-    font-size: 16px;
   }
 
   label span {
