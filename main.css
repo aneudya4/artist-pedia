@@ -59,13 +59,15 @@ label {
 
 label span {
   color: rgba(255, 255, 255, 0);
+  display: inline-block;
+  margin-right: -100px;
 }
 
 .fa-search {
   color: #e31c3d;
   position: absolute;
   top: 1px;
-  left: 365px;
+  left: 265px;
   z-index: 4;
 }
 
@@ -214,59 +216,22 @@ button:hover {
   text-align: center;
   position: relative;
   z-index: 1;
+  border-bottom: 1px solid black;
 }
 .album-img img {
   width: 100%;
   border-radius: 7px;
   object-fit: cover;
 }
-.album-img::after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: 0.5s ease;
-  background-color: rgba(156, 155, 155, 0.568);
-}
-
-.album-img:hover img {
-  filter: grayscale(100%);
-}
-.album-img:hover::after {
-  opacity: 0.7;
-}
-
-.album-img .album-title {
-  position: absolute;
-  font-size: 17px;
-  top: 50%;
-  width: 100%;
-  left: 50%;
-  opacity: 0;
-  transform: translate(-50%, -200%);
-  transition: all 0.5s ease 0s;
-  z-index: 10;
-}
 
 .album-title p {
   background: #e31c3d;
+  font-size: 20px;
   color: white;
   padding: 5px 10px;
-  width: fit-content;
+  min-width: 300px;
+  max-width: fit-content;
   margin: 5px auto;
-}
-
-.album-img:hover .album-title {
-  opacity: 1;
-  transform: translate(-50%, -50%);
 }
 
 .hide-content {
@@ -415,7 +380,52 @@ button:hover {
   .artist-details {
     text-align: left;
   }
+
+  .album-img {
+    border: none;
+  }
   .album-img img {
     width: 300px;
+  }
+
+  .album-img::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: 0.5s ease;
+    background-color: rgba(156, 155, 155, 0.568);
+  }
+
+  .album-img:hover img {
+    filter: grayscale(100%);
+  }
+  .album-img:hover::after {
+    opacity: 0.7;
+  }
+
+  .album-img .album-title {
+    position: absolute;
+    font-size: 17px;
+    top: 50%;
+    width: 100%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -200%);
+    transition: all 0.5s ease 0s;
+    z-index: 10;
+  }
+
+  .album-img:hover .album-title {
+    opacity: 1;
+    transform: translate(-50%, -50%);
   }
 }

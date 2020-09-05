@@ -35,7 +35,7 @@ function fetchArtistInfo(artistName) {
       throw new Error(response.statusText);
     })
     .then((JsonResponse) => {
-      renderArtistInfo(JsonResponse);
+      renderArtistInfo(JsonResponse, artistName);
     })
     .catch((err) => errorMessage(err));
 }
@@ -51,7 +51,10 @@ function fetchArtistAlbums(artistName) {
       throw new Error(response.statusText);
     })
     .then((JsonResponse) => {
-      renderArtistAlbums(JsonResponse);
+      const sortedAlbums = JsonResponse.album.sort(
+        (a, b) => parseInt(a.intYearReleased) - parseInt(b.intYearReleased)
+      );
+      renderArtistAlbums(sortedAlbums, artistName);
     })
     .catch((err) => {
       isLoading();
@@ -72,7 +75,7 @@ function fetchArtistEvent(artistName) {
     })
     .then((responseJson) => {
       isLoading();
-      renderArtistEvents(responseJson._embedded);
+      renderArtistEvents(responseJson._embedded, artistName);
     })
     .catch((err) => {
       $('.artist-data').hide();
@@ -82,13 +85,16 @@ function fetchArtistEvent(artistName) {
     });
 }
 
-function renderArtistInfo(artistInfo) {
+function renderArtistInfo(artistInfo, artistName) {
   const { artists } = artistInfo;
   if (!artists) {
     $('.artist-details').show();
     $('.artist-data').empty();
     $('.nav').hide();
-    notResultsFound($('.artist-info'), 'Artist not found');
+    notResultsFound(
+      $('.artist-info'),
+      `We could not find information about ${artistName}`
+    );
   } else {
     $('.artist-info').empty();
     $('.nav').show();
@@ -127,12 +133,14 @@ function formatBioText(text) {
   const secondIndex = text.indexOf('.', firstIndex + 1);
   return text.substring(0, secondIndex + 1);
 }
-function renderArtistEvents(allEvents) {
-  console.log(allEvents);
+function renderArtistEvents(allEvents, artistName) {
   $('.events-container ul').empty();
   if (!allEvents) {
     isLoading();
-    notResultsFound($('ul.artist-data'), 'Artist has no upcoming events');
+    notResultsFound(
+      $('ul.artist-data'),
+      `${artistName} has no upcoming events`
+    );
   } else {
     const { events } = allEvents;
     for (let i = 0; i < events.length; i++) {
@@ -159,23 +167,25 @@ function renderArtistEvents(allEvents) {
   }
 }
 
-function renderArtistAlbums(albums) {
-  const { album } = albums;
-  console.log(album);
+function renderArtistAlbums(albums, artistName) {
   $('.artist-details').show();
-  if (!album) {
+  if (!albums) {
     isLoading();
-    notResultsFound($('.albums-container'), 'Artist has no albums to show');
+    notResultsFound(
+      $('.albums-container'),
+      `${artistName} has no albums to show`
+    );
   } else {
     $('.albums-container').empty();
-    for (let i = 0; i < album.length; i++) {
-      const img = album[i].strAlbumThumb || './assets/img-placeholder.webp';
+
+    for (let i = 0; i < albums.length; i++) {
+      const img = albums[i].strAlbumThumb || './assets/img-placeholder.webp';
       const albumElement = `
              <div class='album-img'>
-                <img src=${img} alt="${album[i].strArtist}"> 
+                <img src=${img} alt="${albums[i].strArtist}"> 
                 <div class='album-title'>
-                 <p>${album[i].strAlbumStripped} </p>
-                <p>Release Year:${album[i].intYearReleased}</p>
+                 <p>${albums[i].strAlbumStripped} </p>
+                <p>Release Year:${albums[i].intYearReleased}</p>
                 </div> 
         
              </div>
