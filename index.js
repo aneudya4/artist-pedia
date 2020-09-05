@@ -185,7 +185,11 @@ function renderArtistAlbums(albums, artistName) {
                 <img src=${img} alt="${albums[i].strArtist}"> 
                 <div class='album-title'>
                  <p>${albums[i].strAlbumStripped} </p>
-                <p>Release Year:${albums[i].intYearReleased}</p>
+                <p>Release Year:${
+                  albums[i].intYearReleased === 0
+                    ? 'N/A'
+                    : albums[i].intYearReleased
+                }</p>
                 </div> 
         
              </div>
