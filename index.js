@@ -42,7 +42,7 @@ function fetchArtistInfo(artistName) {
 
 function fetchArtistAlbums(artistName) {
   $('.artist-details').hide();
-  const url = config.audioDbAlbumsBaseURL + artistName;
+  const url = config.audiodbAlbumsBaseURL + artistName;
   fetch(url)
     .then((response) => {
       if (response.ok) {
