@@ -357,7 +357,7 @@ button:hover {
   }
 
   .albums-container {
-    justify-content: space-between;
+    justify-content: space-center;
   }
 
   .events-container ul {
@@ -390,6 +390,18 @@ button:hover {
     text-align: left;
   }
 
+  .albums-container {
+    justify-content: space-between;
+  }
+
+  /* this will make the grid to not have empty space  in the last elements row */
+  .albums-container::after {
+    content: '';
+    display: block;
+    flex-basis: 300px;
+  }
+  /* this will make the grid to not have empty space  in the last elements row */
+
   .album-img {
     border: none;
   }
@@ -407,10 +419,8 @@ button:hover {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 100%;
-    width: 100%;
     opacity: 0;
-    transition: 0.5s ease;
+    transition: 0.5s ease-in;
     background-color: rgba(156, 155, 155, 0.568);
   }
 
@@ -428,7 +438,7 @@ button:hover {
     width: 100%;
     left: 50%;
     opacity: 0;
-    transform: translate(-50%, -100%);
+    transform: translate(-50%, -110%);
     transition: all 0.5s ease 0s;
     z-index: 10;
   }
