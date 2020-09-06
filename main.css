@@ -428,7 +428,7 @@ button:hover {
     width: 100%;
     left: 50%;
     opacity: 0;
-    transform: translate(-50%, -200%);
+    transform: translate(-50%, -100%);
     transition: all 0.5s ease 0s;
     z-index: 10;
   }
