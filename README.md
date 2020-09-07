@@ -1,10 +1,10 @@
 # Artist-pedia
 
-A informatinal website to find information about your favorite musicians
+A website to find information about your favorite musicians
 
 ## Motivation
 
-I wanted a place where i could find more details about my favorite musicians and wanted to make it visually pleasent.
+I wanted a place where i could find more details about my favorite musicians and wanted to make it visually appealing.
 
 ## Screenshots
 
@@ -17,7 +17,8 @@ Artist information view
 ![artistView](screenshots/artist-info-page.png)
 
 Artist events view
-![eventsView](screenshots/events-info-view)
+![eventsView](screenshots/events-info-view.png)
+![liveApp](screenshots/giphy.gif)
 
 ## Built With
 
@@ -35,7 +36,7 @@ Artist events view
 - Albums list
 - Upcoming events
 
-##Demo
+## Demo
 
 - [Live Demo](https://aneudya4.github.io/artist-pedia/)
 
