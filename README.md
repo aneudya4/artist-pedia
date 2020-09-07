@@ -8,8 +8,9 @@ I wanted a place where i could find more details about my favorite musicians and
 
 ## Screenshots
 
+Demo
+![liveApp](screenshots/giphy.gif)
 Login Screen/Landing Page:
-
 Homepage
 ![homepage](screenshots/homepage.png)
 
@@ -18,7 +19,6 @@ Artist information view
 
 Artist events view
 ![eventsView](screenshots/events-info-view.png)
-![liveApp](screenshots/giphy.gif)
 
 ## Built With
 
