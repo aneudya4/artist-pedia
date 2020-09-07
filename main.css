@@ -277,6 +277,7 @@ button:hover {
   text-align: center;
   width: 40%;
   margin: 0 auto;
+  height: 100%;
 }
 
 .no-results-found img {
@@ -335,13 +336,15 @@ button:hover {
 }
 
 footer {
+  position: absolute;
+  width: 100%;
+  bottom: 1px;
   height: 5vh;
   background: #969595e7;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-
   color: whitesmoke;
   font-size: 20px;
 }

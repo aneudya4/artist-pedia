@@ -99,7 +99,6 @@ function renderArtistInfo(artistInfo, artistName) {
   } else {
     $('.artist-info').empty();
     $('.nav').show();
-
     const bio = formatBioText(artists[0].strBiographyEN);
     const artistData = `
            <div class='img-container'>
@@ -121,7 +120,6 @@ function renderArtistInfo(artistInfo, artistName) {
            </a>
            </span>
            </div>
-           
            `;
     $('.artist-info').append(artistData);
     fetchArtistAlbums(artists[0].strArtist);
@@ -150,7 +148,7 @@ function renderArtistAlbums(albums, artistName) {
       const img = albums[i].strAlbumThumb || './assets/img-placeholder.webp';
       const albumElement = `
              <div class='album-img'>
-                <img src=${img} alt="${albums[i].strArtist}"> 
+                <img src=${img} alt="${albums[i].strArtist}">
                 <div class='album-title'>
                  <p>${albums[i].strAlbumStripped} </p>
                 <p>Release Year:${
@@ -158,8 +156,8 @@ function renderArtistAlbums(albums, artistName) {
                     ? 'N/A'
                     : albums[i].intYearReleased
                 }</p>
-                </div> 
-        
+                </div>
+
              </div>
             `;
       $('.albums-container').append(albumElement);
@@ -177,7 +175,6 @@ function renderArtistEvents(allEvents, artistName) {
     );
   } else {
     const { events } = allEvents;
-    console.log(events);
     for (let i = 0; i < events.length; i++) {
       const { dates, images, name, url, _embedded } = events[i];
       const date = new Date(dates.start.dateTime);
@@ -187,14 +184,14 @@ function renderArtistEvents(allEvents, artistName) {
                   <img src=${images[images.length - 1].url} alt="${name}">
                       <p>${name}</p>
                       <p><a href=${url} target="_blank">Buy Tickets</a></p>
-                      <p>${_embedded.venues[0].name} </p> 
+                      <p>${_embedded.venues[0].name} </p>
                       <p>
-                      <span> ${_embedded.venues[0].city.name}</span> 
-                      <span> ${_embedded.venues[0].country.name}</span> 
-                      </p> 
-                   <p> Date: ${formatDate} </p> 
-                   <p> Status:${dates.status.code} </p> 
-                   
+                      <span> ${_embedded.venues[0].city.name}</span>
+                      <span> ${_embedded.venues[0].country.name}</span>
+                      </p>
+                   <p> Date: ${formatDate} </p>
+                   <p> Status:${dates.status.code} </p>
+
               </li>
               `;
       $('.events-container ul').append(liElement);
