@@ -88,7 +88,7 @@ button:hover {
 }
 
 .landing {
-  height: 100vh;
+  height: 95vh;
   background-image: url('./assets/landing-img.webp');
   background-position: center;
   background-repeat: no-repeat;
@@ -331,6 +331,26 @@ button:hover {
   100% {
     transform: rotate(360deg);
   }
+}
+
+footer {
+  height: 5vh;
+  background: #969595e7;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e31c3d;
+  font-size: 20px;
+}
+
+footer a i {
+  color: black;
+  display: inline-block;
+  margin: 0 5px;
+}
+.fa-linkedin {
+  color: #2867b2;
 }
 
 @media all and (min-width: 825px) {
