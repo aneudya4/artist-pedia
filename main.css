@@ -253,10 +253,11 @@ button:hover {
 }
 
 .events-container ul li {
+  align-self: center;
   border: 1px solid rgba(150, 148, 148, 0.486);
   margin: 10px auto;
-  max-width: 320px;
   border-radius: 7px;
+  max-width: 320px;
 }
 .events-container li img {
   width: 100%;
@@ -378,7 +379,7 @@ footer a i {
   }
 
   .albums-container {
-    justify-content: space-center;
+    justify-content: space-around;
   }
 
   .events-container ul {
@@ -386,13 +387,22 @@ footer a i {
     flex-direction: row;
     flex-wrap: wrap;
     margin: 0 auto;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
 
   .events-container ul li {
     width: 400px;
     color: #a81900;
+    margin: 10px 0;
   }
+
+  /* this will make the grid to not have empty space  in the last elements row */
+  .events-container ul::after {
+    content: '';
+    height: 345px;
+    width: 320px;
+  }
+  /* this will make the grid to not have empty space  in the last elements row */
   .loader {
     margin: 0;
     position: absolute;
@@ -467,5 +477,9 @@ footer a i {
   .album-img:hover .album-title {
     opacity: 1;
     transform: translate(-50%, -50%);
+  }
+
+  .events-container ul {
+    justify-content: space-between;
   }
 }

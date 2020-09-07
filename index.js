@@ -6,7 +6,7 @@ function watchForm() {
     isLoading();
     // sets loading to show when fetching information
     const artistName = $('input').val();
-    showHideAlbumsAndEvents();
+    showHideAlbumsOrEvents();
     fetchArtistInfo(artistName);
     $('input').val('');
     // sets input value back to empty
@@ -19,7 +19,7 @@ function isLoading() {
   $('.loader').toggleClass('hide-content');
   $('.albums-container').show();
   $('.events-container').hide();
-  //   shows or hide loader
+  //   shows or hide loader-spinner
 }
 
 function fetchArtistInfo(artistName) {
@@ -54,6 +54,7 @@ function fetchArtistAlbums(artistName) {
       const sortedAlbums = JsonResponse.album.sort(
         (a, b) => parseInt(a.intYearReleased) - parseInt(b.intYearReleased)
       );
+      //  sorting albums from old-new
       renderArtistAlbums(sortedAlbums, artistName);
     })
     .catch((err) => {
@@ -79,8 +80,8 @@ function fetchArtistEvent(artistName) {
     })
     .catch((err) => {
       $('.artist-data').hide();
-      // hiding the  data since albums takes longer to fetch  they were rendering after the function was done
-      // added a settimeout inside  the function
+      // hiding the  data ,since albums takes longer to fetch  they were rendering after the function was done
+      // added a settimeout inside the function
       errorMessage();
     });
 }
@@ -128,43 +129,11 @@ function renderArtistInfo(artistInfo, artistName) {
   }
 }
 
+// reducing the text characters count , api sometimes sends text too large
 function formatBioText(text) {
   const firstIndex = text.indexOf('.');
   const secondIndex = text.indexOf('.', firstIndex + 1);
   return text.substring(0, secondIndex + 1);
-}
-function renderArtistEvents(allEvents, artistName) {
-  $('.events-container ul').empty();
-  if (!allEvents) {
-    isLoading();
-    notResultsFound(
-      $('ul.artist-data'),
-      `${artistName} has no upcoming events`
-    );
-  } else {
-    const { events } = allEvents;
-    for (let i = 0; i < events.length; i++) {
-      const { dates, images, name, url, _embedded } = events[i];
-      const date = new Date(dates.start.dateTime);
-      const formatDate = `${date.getUTCMonth()}/${date.getUTCDay()}/${date.getUTCFullYear()}`;
-      const liElement = `
-              <li>
-                  <img src=${images[6].url} alt="${name}">
-                      <p>${name}</p>
-                      <p><a href=${url} target="_blank">Buy Tickets</a></p>
-                      <p>${_embedded.venues[0].name} </p> 
-                      <p>
-                      <span> ${_embedded.venues[0].city.name}</span> 
-                      <span> ${_embedded.venues[0].country.name}</span> 
-                      </p> 
-                   <p> Date: ${formatDate} </p> 
-                   <p> Status:${dates.status.code} </p> 
-                   
-              </li>
-              `;
-      $('.events-container ul').append(liElement);
-    }
-  }
 }
 
 function renderArtistAlbums(albums, artistName) {
@@ -198,7 +167,42 @@ function renderArtistAlbums(albums, artistName) {
   }
 }
 
-function showHideAlbumsAndEvents() {
+function renderArtistEvents(allEvents, artistName) {
+  $('.events-container ul').empty();
+  if (!allEvents) {
+    isLoading();
+    notResultsFound(
+      $('ul.artist-data'),
+      `${artistName} has no upcoming events`
+    );
+  } else {
+    const { events } = allEvents;
+    console.log(events);
+    for (let i = 0; i < events.length; i++) {
+      const { dates, images, name, url, _embedded } = events[i];
+      const date = new Date(dates.start.dateTime);
+      const formatDate = `${date.getUTCMonth()}/${date.getUTCDay()}/${date.getUTCFullYear()}`;
+      const liElement = `
+              <li>
+                  <img src=${images[images.length - 1].url} alt="${name}">
+                      <p>${name}</p>
+                      <p><a href=${url} target="_blank">Buy Tickets</a></p>
+                      <p>${_embedded.venues[0].name} </p> 
+                      <p>
+                      <span> ${_embedded.venues[0].city.name}</span> 
+                      <span> ${_embedded.venues[0].country.name}</span> 
+                      </p> 
+                   <p> Date: ${formatDate} </p> 
+                   <p> Status:${dates.status.code} </p> 
+                   
+              </li>
+              `;
+      $('.events-container ul').append(liElement);
+    }
+  }
+}
+
+function showHideAlbumsOrEvents() {
   $('.nav ul li').on('click', function () {
     $('.nav ul li').removeClass('selected-view');
     $(this).addClass('selected-view');
@@ -225,6 +229,7 @@ function notResultsFound(parentElement, errMessage) {
 }
 
 function errorMessage() {
+  // error message will show if any of the  GET request failes
   $('.artist-details').find('.error-message').remove();
   $('.nav').hide();
 

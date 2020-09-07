@@ -28,6 +28,8 @@ Artist events view
 - CSS
 - JavaScript
 - Jquery
+- Font-Awesome
+- Google Fonts
 
 ## Features
 
