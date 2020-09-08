@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: 'Dosis', sans-serif;
 }
+
 body {
   background: #f7fafc;
 }
@@ -88,7 +89,7 @@ button:hover {
 }
 
 .landing {
-  height: 100vh;
+  height: 95vh;
   background-image: url('./assets/landing-img.webp');
   background-position: center;
   background-repeat: no-repeat;
@@ -138,6 +139,7 @@ button:hover {
   margin: 20px auto;
   text-align: justify;
 }
+
 .img-container {
   max-width: 400px;
   object-fit: cover;
@@ -212,6 +214,14 @@ button:hover {
   text-align: center;
   flex-wrap: wrap;
 }
+
+/* this will make the grid to not have empty space  in the last elements row */
+.albums-container::after {
+  content: '';
+  display: block;
+  flex-basis: 300px;
+}
+/* this will make the grid to not have empty space  in the last elements row */
 .album-img {
   margin: 5px;
   flex-basis: 300px;
@@ -228,12 +238,16 @@ button:hover {
 
 .album-title p {
   background: #e31c3d;
-  font-size: 20px;
+  font-size: 16px;
   color: white;
   padding: 5px 10px;
   min-width: 300px;
   max-width: fit-content;
   margin: 5px auto;
+}
+
+p.small-title {
+  padding: 15px;
 }
 
 .hide-content {
@@ -251,6 +265,13 @@ button:hover {
   flex-direction: column;
   margin: 0 auto;
 }
+
+/* this will make the grid to not have empty space  in the last elements row */
+.events-container ul::after {
+  content: '';
+  width: 320px;
+}
+/* this will make the grid to not have empty space  in the last elements row */
 
 .events-container ul li {
   align-self: center;
@@ -336,6 +357,18 @@ button:hover {
   }
 }
 
+footer {
+  background: #969595e7;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  font-size: 20px;
+  height: 5vh;
+  margin-top: auto;
+}
+
 footer a i {
   color: black;
   display: inline-block;
@@ -372,27 +405,24 @@ footer a i {
     justify-content: space-around;
   }
 
+  .album-img {
+    border: none;
+  }
+
   .events-container ul {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin: 0 auto;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   .events-container ul li {
     width: 400px;
     color: #a81900;
-    margin: 10px 0;
+    margin: 10px 5px;
   }
 
-  /* this will make the grid to not have empty space  in the last elements row */
-  .events-container ul::after {
-    content: '';
-    height: 345px;
-    width: 320px;
-  }
-  /* this will make the grid to not have empty space  in the last elements row */
   .loader {
     margin: 0;
     position: absolute;
@@ -402,7 +432,7 @@ footer a i {
   }
 }
 
-@media all and (min-width: 1000px) {
+@media all and (min-width: 990px) {
   header::after {
     content: '';
     display: block;
@@ -415,17 +445,6 @@ footer a i {
     justify-content: space-between;
   }
 
-  /* this will make the grid to not have empty space  in the last elements row */
-  .albums-container::after {
-    content: '';
-    display: block;
-    flex-basis: 300px;
-  }
-  /* this will make the grid to not have empty space  in the last elements row */
-
-  .album-img {
-    border: none;
-  }
   .album-img img {
     width: 300px;
   }

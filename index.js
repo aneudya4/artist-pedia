@@ -99,6 +99,9 @@ function renderArtistInfo(artistInfo, artistName) {
   } else {
     $('.artist-info').empty();
     $('.nav').show();
+    $('.artist-info').css('height', 'auto');
+    // this was add to make the footer to stay in the bottom when no content is found
+
     const bio = formatBioText(artists[0].strBiographyEN);
     const artistData = `
            <div class='img-container'>
@@ -150,7 +153,9 @@ function renderArtistAlbums(albums, artistName) {
              <div class='album-img'>
                 <img src=${img} alt="${albums[i].strArtist}">
                 <div class='album-title'>
-                 <p>${albums[i].strAlbumStripped} </p>
+                 <p class=${
+                   albums[i].strAlbumStripped.length <= 45 ? 'small-title' : ''
+                 }>${albums[i].strAlbumStripped}</p>
                 <p>Release Year:${
                   albums[i].intYearReleased == 0
                     ? 'N/A'
@@ -215,6 +220,8 @@ function showHideAlbumsOrEvents() {
 
 function notResultsFound(parentElement, errMessage) {
   $('.artist-data').show();
+  $('.artist-info').css('height', '76vh');
+  // this  css makes the footer to stay in the bottom
   isLoading();
   const notFoundImg = parentElement.hasClass('artist-info')
     ? './assets/not-found.svg'
