@@ -279,6 +279,7 @@ p.small-title {
   margin: 10px auto;
   border-radius: 7px;
   max-width: 400px;
+  color: #a81900;
 }
 .events-container li img {
   width: 100%;
@@ -419,7 +420,6 @@ footer a i {
 
   .events-container ul li {
     width: 400px;
-    color: #a81900;
     margin: 10px 5px;
   }
 
@@ -435,10 +435,6 @@ footer a i {
   .albums-container {
     justify-content: space-between;
   }
-
-  /* .events-container ul::after {
-    display: none;
-  } */
 }
 @media all and (min-width: 990px) {
   header::after {
