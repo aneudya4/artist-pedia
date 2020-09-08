@@ -194,8 +194,7 @@ function renderArtistEvents(allEvents, artistName) {
     const { events } = allEvents;
     for (let i = 0; i < events.length; i++) {
       const { dates, images, name, url, _embedded } = events[i];
-      const date = new Date(dates.start.dateTime);
-      const formatDate = `${date.getUTCMonth()}/${date.getUTCDay()}/${date.getUTCFullYear()}`;
+      const date = formatDate(dates.start.localDate);
       const liElement = `
               <li>
                   <img src=${images[images.length - 1].url} alt="${name}">
@@ -206,7 +205,7 @@ function renderArtistEvents(allEvents, artistName) {
                       <span> ${_embedded.venues[0].city.name}</span>
                       <span> ${_embedded.venues[0].country.name}</span>
                       </p>
-                   <p> Date: ${formatDate} </p>
+                   <p> Date: ${date} </p>
                    <p> Status:${dates.status.code} </p>
 
               </li>
@@ -214,6 +213,12 @@ function renderArtistEvents(allEvents, artistName) {
       $('.events-container ul').append(liElement);
     }
   }
+}
+
+function formatDate(date) {
+  const dateArr = date.split('-');
+  const newDateFormat = `${dateArr[1]}/${dateArr[2]}/${dateArr[0]}`;
+  return newDateFormat;
 }
 
 function showHideAlbumsOrEvents() {
