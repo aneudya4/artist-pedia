@@ -186,7 +186,6 @@ function renderArtistEvents(allEvents, artistName) {
 
   if (!allEvents) {
     isLoading();
-    // $('.events-container').children('.no-results-found').remove();
     notResultsFound(
       $('.events-container'),
       `${artistName} has no upcoming events`
@@ -195,11 +194,14 @@ function renderArtistEvents(allEvents, artistName) {
     $('.events-container').children('.no-results-found').remove();
     const { events } = allEvents;
     for (let i = 0; i < events.length; i++) {
-      const { dates, name, url, _embedded } = events[i];
+      const { dates, name, url, _embedded, images } = events[i];
       // checks if properties are present in event obejct
       if (_embedded && name && url && dates) {
-        const imgUrl = events[0].images[events[0].images.length - 1].url;
-        // this makes all events to have the same image
+        const highQualityImg = images.find((img) => img.width > 500);
+        const imgUrl = highQualityImg
+          ? highQualityImg.url
+          : './assets/img-placeholder.webp';
+        // place holder img in case img is not found
         const date = formatDate(dates.start.localDate);
         const liElement = `
                 <li>
