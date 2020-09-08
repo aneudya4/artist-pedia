@@ -92,6 +92,7 @@ function fetchArtistEvent(artistName) {
       $('.artist-data').hide();
       // hiding the  data ,since albums takes longer to fetch  they were rendering after the function was done
       // added a settimeout inside the function
+      isLoading();
       errorMessage();
     });
 }
@@ -100,6 +101,7 @@ function renderArtistInfo(artistInfo, artistName) {
   const { artists } = artistInfo;
   if (!artists) {
     $('.artist-details').show();
+
     $('.artist-info').css('height', '76vh');
     // this  css makes the footer to stay in the bottom if there is no data to render
     $('.artist-data').empty();
@@ -262,11 +264,12 @@ function notResultsFound(parentElement, errMessage) {
 
 function errorMessage() {
   // error message will show if any of the  GET request failes
-  $('.artist-details').find('.error-message').remove();
+  // $('.artist-details').find('.error-message').remove();
   $('.nav').hide();
 
   setTimeout(() => {
-    // isLoading();
+    $('.artist-details').find('.error-message').remove();
+
     $('.artist-data').empty();
     $('.artist-details').show();
     $('.nav').hide();

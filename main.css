@@ -316,6 +316,7 @@ p.small-title {
 .error-message {
   text-align: center;
   width: 300px;
+  height: 95vh;
   margin: 0 auto;
 }
 
