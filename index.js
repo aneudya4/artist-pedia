@@ -1,15 +1,19 @@
 function watchForm() {
   $('form').on('submit', (event) => {
     event.preventDefault();
-    $('.artist-details').fadeIn();
-    $('.landing').hide();
-    isLoading();
-    // sets loading to show when fetching information
     const artistName = $('input').val();
-    showHideAlbumsOrEvents();
-    fetchArtistInfo(artistName);
-    $('input').val('');
-    // sets input value back to empty
+    if ($.trim($('#myInput').val()) == '') {
+      alert('input cant be empty');
+    } else {
+      $('.artist-details').fadeIn();
+      $('.landing').hide();
+      isLoading();
+      // sets loading to show when fetching information
+      showHideAlbumsOrEvents();
+      fetchArtistInfo(artistName);
+      $('input').val('');
+      // sets input value back to empty
+    }
   });
 }
 

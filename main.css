@@ -434,6 +434,7 @@ footer a i {
     transform: translate(-50%, -50%);
   }
 }
+
 @media all and (min-width: 930px) {
   .albums-container {
     justify-content: space-between;
