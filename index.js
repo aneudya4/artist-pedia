@@ -186,6 +186,7 @@ function renderArtistEvents(allEvents, artistName) {
 
   if (!allEvents) {
     isLoading();
+    // $('.events-container').children('.no-results-found').remove();
     notResultsFound(
       $('.events-container'),
       `${artistName} has no upcoming events`
@@ -195,7 +196,7 @@ function renderArtistEvents(allEvents, artistName) {
     const { events } = allEvents;
     for (let i = 0; i < events.length; i++) {
       const { dates, name, url, _embedded } = events[i];
-      // checks if properties are present in  events objc
+      // checks if properties are present in event obejct
       if (_embedded && name && url && dates) {
         const imgUrl = events[0].images[events[0].images.length - 1].url;
         // this makes all events to have the same image
@@ -245,6 +246,8 @@ function showHideAlbumsOrEvents() {
 
 function notResultsFound(parentElement, errMessage) {
   $('.artist-data').show();
+  parentElement.children('.no-results-found').remove();
+  // removing in case  there was elements before
   isLoading();
   const notFoundImg = parentElement.hasClass('artist-info')
     ? './assets/not-found.svg'
