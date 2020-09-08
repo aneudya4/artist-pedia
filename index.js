@@ -45,7 +45,10 @@ function fetchArtistInfo(artistName) {
     .then((JsonResponse) => {
       renderArtistInfo(JsonResponse, artistName);
     })
-    .catch((err) => errorMessage(err));
+    .catch((err) => {
+      isLoading();
+      errorMessage(err);
+    });
 }
 
 function fetchArtistAlbums(artistName) {
@@ -66,7 +69,6 @@ function fetchArtistAlbums(artistName) {
       renderArtistAlbums(sortedAlbums, artistName);
     })
     .catch((err) => {
-      isLoading();
       errorMessage(err);
     });
 }
@@ -156,7 +158,6 @@ function renderArtistAlbums(albums, artistName) {
     );
   } else {
     $('.albums-container').empty();
-    // $('.artist-info').css('height', 'auto');
     for (let i = 0; i < albums.length; i++) {
       const img = albums[i].strAlbumThumb || './assets/img-placeholder.webp';
       const albumElement = `
@@ -193,26 +194,31 @@ function renderArtistEvents(allEvents, artistName) {
     $('.events-container').children('.no-results-found').remove();
     const { events } = allEvents;
     for (let i = 0; i < events.length; i++) {
-      const { dates, images, name, url, _embedded } = events[i];
-      const imgUrl = events[0].images[events[0].images.length - 1].url;
-      // this makes all events to have the same image
-      const date = formatDate(dates.start.localDate);
-      const liElement = `
-              <li>
-                  <img src=${imgUrl} alt="${name}">
-                      <p>${name}</p>
-                      <p><a href=${url} target="_blank">Buy Tickets</a></p>
-                      <p>${_embedded.venues[0].name} </p>
-                      <p>
-                      <span> ${_embedded.venues[0].city.name}</span>
-                      <span> ${_embedded.venues[0].country.name}</span>
-                      </p>
-                   <p> Date: ${date} </p>
-                   <p> Status:${dates.status.code} </p>
-
-              </li>
-              `;
-      $('.events-container ul').append(liElement);
+      const { dates, name, url, _embedded } = events[i];
+      // checks if properties are present in  events objc
+      if (_embedded && name && url && dates) {
+        const imgUrl = events[0].images[events[0].images.length - 1].url;
+        // this makes all events to have the same image
+        const date = formatDate(dates.start.localDate);
+        const liElement = `
+                <li>
+                    <img src=${imgUrl} alt="${name}">
+                        <p>${name}</p>
+                        <p><a href=${url} target="_blank">Buy Tickets</a></p>
+                        <p>${_embedded.venues[0].name || 'N/A'} </p>
+                        <p>
+                        <span> ${_embedded.venues[0].city.name || 'N/A'}</span>
+                        <span> ${
+                          _embedded.venues[0].country.name || 'N/A'
+                        }</span>
+                        </p>
+                     <p> Date: ${date} </p>
+                     <p> Status:${dates.status.code} </p>
+  
+                </li>
+                `;
+        $('.events-container ul').append(liElement);
+      }
     }
   }
 }
@@ -255,7 +261,7 @@ function errorMessage() {
   $('.nav').hide();
 
   setTimeout(() => {
-    isLoading();
+    // isLoading();
     $('.artist-data').empty();
     $('.artist-details').show();
     $('.nav').hide();
@@ -265,7 +271,7 @@ function errorMessage() {
         <img src='./assets/error_message.svg'>
         </div>
         `);
-  }, 1000);
+  }, 1500);
 }
 
 $(watchForm);
