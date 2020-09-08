@@ -13,6 +13,7 @@ function watchForm() {
       showHideAlbumsOrEvents();
       fetchArtistInfo(artistName);
       $('input').val('');
+
       // sets input value back to empty
     }
   });
@@ -32,6 +33,9 @@ function isLoading() {
 
 function fetchArtistInfo(artistName) {
   const url = config.audiodbArtistBaseURL + artistName;
+  $('.artist-details').find('.error-message').remove();
+  // clear message if there is an attempt after a request failure
+
   $('.artist-details').hide();
   $('.nav').hide();
   fetch(url)

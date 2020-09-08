@@ -300,7 +300,7 @@ p.small-title {
   width: 40%;
   min-width: 300px;
   height: 100%;
-  margin: 0 auto;
+  margin-left: auto;
 }
 
 .no-results-found img {
