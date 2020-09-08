@@ -1,7 +1,7 @@
 function watchForm() {
   $('form').on('submit', (event) => {
     event.preventDefault();
-    $('.artist-details').show();
+    $('.artist-details').fadeIn();
     $('.landing').hide();
     isLoading();
     // sets loading to show when fetching information
@@ -17,10 +17,11 @@ function isLoading() {
   $('.nav ul li').removeClass('selected-view');
   $('.albums').addClass('selected-view');
   $('.loader').toggleClass('hide-content');
-  $('footer').toggleClass('hide-content');
-  // hiding footer so it wont show while content is loading
   $('.albums-container').show();
   $('.events-container').hide();
+  $('footer').toggleClass('hide-content');
+  // hiding footer so it wont show while content is loading ,
+
   //   shows or hide loader-spinner
 }
 
@@ -141,7 +142,7 @@ function formatBioText(text) {
 }
 
 function renderArtistAlbums(albums, artistName) {
-  $('.artist-details').show();
+  $('.artist-details').fadeIn();
   if (!albums) {
     isLoading();
     notResultsFound(
@@ -215,11 +216,11 @@ function showHideAlbumsOrEvents() {
     $('.nav ul li').removeClass('selected-view');
     $(this).addClass('selected-view');
     if ($(this).hasClass('events')) {
-      $('.albums-container').hide();
-      $('.events-container').show();
+      $('.albums-container').fadeOut();
+      $('.events-container').fadeIn();
     } else {
-      $('.albums-container').show();
-      $('.events-container').hide();
+      $('.albums-container').fadeIn();
+      $('.events-container').fadeOut();
     }
   });
 }

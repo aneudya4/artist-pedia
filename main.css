@@ -109,7 +109,6 @@ button:hover {
   font-size: 40px;
   background: rgba(255, 99, 71, 0.452);
   background: #e31c3d8f;
-
   padding: 5px;
 }
 .app-desc p {
@@ -385,6 +384,9 @@ footer a i {
     flex-direction: row;
     justify-content: space-between;
     max-width: 1600px;
+  }
+  .bio h2 {
+    text-align: justify;
   }
 
   label span {
