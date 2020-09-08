@@ -1,11 +1,11 @@
 function watchForm() {
   $('form').on('submit', (event) => {
     event.preventDefault();
-    if ($.trim($('input').val()) == '') {
+    const artistName = $('input').val();
+    if (artistName.trim() === '') {
       $('input').val('');
       alert('input cant be empty');
     } else {
-      const artistName = $('input').val();
       $('.artist-details').fadeIn();
       $('.landing').hide();
       isLoading();
@@ -194,10 +194,12 @@ function renderArtistEvents(allEvents, artistName) {
     const { events } = allEvents;
     for (let i = 0; i < events.length; i++) {
       const { dates, images, name, url, _embedded } = events[i];
+      const imgUrl = events[0].images[events[0].images.length - 1].url;
+      // this makes all events to have the same image
       const date = formatDate(dates.start.localDate);
       const liElement = `
               <li>
-                  <img src=${images[images.length - 1].url} alt="${name}">
+                  <img src=${imgUrl} alt="${name}">
                       <p>${name}</p>
                       <p><a href=${url} target="_blank">Buy Tickets</a></p>
                       <p>${_embedded.venues[0].name} </p>
