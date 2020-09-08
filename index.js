@@ -158,6 +158,7 @@ function renderArtistAlbums(albums, artistName) {
   $('.artist-details').fadeIn();
   if (!albums) {
     isLoading();
+    $('.albums-container').css('display', 'block');
     notResultsFound(
       $('.albums-container'),
       `${artistName} has no albums to show`
@@ -260,6 +261,7 @@ function notResultsFound(parentElement, errMessage) {
   const notFoundImg = parentElement.hasClass('artist-info')
     ? './assets/not-found.svg'
     : './assets/no-data.svg';
+
   parentElement.append(`<div class='no-results-found'>
           <p>${errMessage}</p>
           <img src=${notFoundImg}>

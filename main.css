@@ -296,11 +296,10 @@ p.small-title {
 }
 
 .no-results-found {
-  text-align: center;
   width: 40%;
   min-width: 300px;
   height: 100%;
-  margin-left: auto;
+  margin: 0 auto;
 }
 
 .no-results-found img {
