@@ -1,10 +1,11 @@
 function watchForm() {
   $('form').on('submit', (event) => {
     event.preventDefault();
-    const artistName = $('input').val();
-    if ($.trim($('#myInput').val()) == '') {
+    if ($.trim($('input').val()) == '') {
+      $('input').val('');
       alert('input cant be empty');
     } else {
+      const artistName = $('input').val();
       $('.artist-details').fadeIn();
       $('.landing').hide();
       isLoading();
