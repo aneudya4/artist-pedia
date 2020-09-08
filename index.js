@@ -17,6 +17,8 @@ function isLoading() {
   $('.nav ul li').removeClass('selected-view');
   $('.albums').addClass('selected-view');
   $('.loader').toggleClass('hide-content');
+  $('footer').toggleClass('hide-content');
+  // hiding footer so it wont show while content is loading
   $('.albums-container').show();
   $('.events-container').hide();
   //   shows or hide loader-spinner
