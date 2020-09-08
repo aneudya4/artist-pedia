@@ -8,11 +8,15 @@ I wanted a place where i could find more details about my favorite musicians and
 
 ## Screenshots
 
-Demo
+<p>Demo</p>
 ![liveApp](screenshots/giphy.gif)
-Login Screen/Landing Page:
+
+## Login Screen/Landing Page:
+
 Homepage
 ![homepage](screenshots/homepage.png)
+
+## Content view
 
 Artist information view
 ![artistView](screenshots/artist-info-page.png)
