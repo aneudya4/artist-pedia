@@ -90,6 +90,8 @@ function renderArtistInfo(artistInfo, artistName) {
   const { artists } = artistInfo;
   if (!artists) {
     $('.artist-details').show();
+    $('.artist-info').css('height', '76vh');
+    // this  css makes the footer to stay in the bottom if there is no data to render
     $('.artist-data').empty();
     $('.nav').hide();
     notResultsFound(
@@ -100,7 +102,6 @@ function renderArtistInfo(artistInfo, artistName) {
     $('.artist-info').empty();
     $('.nav').show();
     $('.artist-info').css('height', 'auto');
-    // this was add to make the footer to stay in the bottom when no content is found
 
     const bio = formatBioText(artists[0].strBiographyEN);
     const artistData = `
@@ -147,6 +148,7 @@ function renderArtistAlbums(albums, artistName) {
     );
   } else {
     $('.albums-container').empty();
+    // $('.artist-info').css('height', 'auto');
     for (let i = 0; i < albums.length; i++) {
       const img = albums[i].strAlbumThumb || './assets/img-placeholder.webp';
       const albumElement = `
@@ -172,13 +174,15 @@ function renderArtistAlbums(albums, artistName) {
 
 function renderArtistEvents(allEvents, artistName) {
   $('.events-container ul').empty();
+
   if (!allEvents) {
     isLoading();
     notResultsFound(
-      $('ul.artist-data'),
+      $('.events-container'),
       `${artistName} has no upcoming events`
     );
   } else {
+    $('.events-container').children('.no-results-found').remove();
     const { events } = allEvents;
     for (let i = 0; i < events.length; i++) {
       const { dates, images, name, url, _embedded } = events[i];
@@ -220,8 +224,6 @@ function showHideAlbumsOrEvents() {
 
 function notResultsFound(parentElement, errMessage) {
   $('.artist-data').show();
-  $('.artist-info').css('height', '76vh');
-  // this  css makes the footer to stay in the bottom
   isLoading();
   const notFoundImg = parentElement.hasClass('artist-info')
     ? './assets/not-found.svg'

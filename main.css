@@ -269,7 +269,7 @@ p.small-title {
 /* this will make the grid to not have empty space  in the last elements row */
 .events-container ul::after {
   content: '';
-  width: 320px;
+  flex-basis: 400px;
 }
 /* this will make the grid to not have empty space  in the last elements row */
 
@@ -278,7 +278,7 @@ p.small-title {
   border: 1px solid rgba(150, 148, 148, 0.486);
   margin: 10px auto;
   border-radius: 7px;
-  max-width: 320px;
+  max-width: 400px;
 }
 .events-container li img {
   width: 100%;
@@ -431,7 +431,15 @@ footer a i {
     transform: translate(-50%, -50%);
   }
 }
+@media all and (min-width: 930px) {
+  .albums-container {
+    justify-content: space-between;
+  }
 
+  /* .events-container ul::after {
+    display: none;
+  } */
+}
 @media all and (min-width: 990px) {
   header::after {
     content: '';
@@ -439,10 +447,6 @@ footer a i {
   }
   .artist-details {
     text-align: left;
-  }
-
-  .albums-container {
-    justify-content: space-between;
   }
 
   .album-img img {
@@ -489,6 +493,6 @@ footer a i {
   }
 
   .events-container ul {
-    justify-content: space-between;
+    justify-content: space-around;
   }
 }
