@@ -8,7 +8,7 @@ I wanted a place where i could find more details about my favorite musicians and
 
 ## Screenshots
 
-## Demostration
+## Showcase
 
 ![liveApp](screenshots/giphy.gif)
 

@@ -275,14 +275,14 @@ function errorMessage() {
 
   setTimeout(() => {
     $('.artist-details').find('.error-message').remove();
-
+    $('.artist-info').css('height', 'auto');
     $('.artist-data').empty();
     $('.artist-details').show();
     $('.nav').hide();
     $('.artist-details').append(`
         <div class='error-message'>
         <p>Something went wrong ,please try again later!</p>
-        <img src='./assets/error_message.svg'>
+        <img src='./assets/error_message.svg' alt='error message'>
         </div>
         `);
   }, 1500);
