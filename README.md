@@ -8,7 +8,8 @@ I wanted a place where i could find more details about my favorite musicians and
 
 ## Screenshots
 
-<p>Demo</p>
+## Demostration
+
 ![liveApp](screenshots/giphy.gif)
 
 ## Login Screen/Landing Page:
