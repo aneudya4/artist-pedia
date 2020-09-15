@@ -1,0 +1,29 @@
+{
+  "name": "artist-pedia",
+  "version": "1.0.0",
+  "description": "A website to find information about your favorite musicians",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aneudya4/artist-pedia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aneudya4/artist-pedia/issues"
+  },
+  "homepage": "https://github.com/aneudya4/artist-pedia#readme",
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "systemjs": "^0.19.41"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.1",
+    "lite-server": "^2.5.4"
+  }
+}
