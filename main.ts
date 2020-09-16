@@ -1,59 +1,29 @@
 import 'jquery';
 import config from './config';
-
-interface Artist {
-  strBiographyEN: string;
-  strArtistThumb: string;
-  strArtist: string;
-  strCountry: string;
-  strStyle: string;
-  strTwitter: string;
-  strWebsite: string;
-}
-
-interface Albums {
-  strAlbumThumb: string;
-  strArtist: string;
-  strAlbumStripped: string;
-  intYearReleased: number;
-}
-
-interface events {
-  dates: any;
-  name: string;
-  url: string;
-  _embedded: any;
-  images: any;
-}
-
-interface AllEvents {
-  events: events[];
-}
-// =========================== //
-function watchForm() {
+import { Artist, Albums, AllEvents } from './interfaces';
+function watchForm(): void {
   $('form').on('submit', (event: Event) => {
     event.preventDefault();
     const input: JQuery<HTMLInputElement> = $('input');
-    const artistName: any = input.val();
+    const artistName: string = <string>input.val();
     // artistName is giving me a warning for undefiend values
     if (artistName.trim() === '') {
-      $('input').val('');
+      input.val('');
       alert('input cant be empty');
     } else {
       $('.artist-details').fadeIn();
       $('.landing').hide();
-      isLoading();
+      renderSpinner();
       // sets loading to show when fetching information
       showHideAlbumsOrEvents();
       fetchArtistInfo(artistName);
       $('input').val('');
-
       // sets input value back to empty
     }
   });
 }
 
-function isLoading(): void {
+function renderSpinner(): void {
   $('.nav ul li').removeClass('selected-view');
   $('.albums').addClass('selected-view');
   $('.loader').toggleClass('hide-content');
@@ -84,7 +54,7 @@ function fetchArtistInfo(artistName: string): void {
       renderArtistInfo(JsonResponse.artists, artistName);
     })
     .catch((err: string) => {
-      isLoading();
+      renderSpinner();
       errorMessage();
     });
 }
@@ -124,14 +94,14 @@ function fetchArtistEvent(artistName: string): void {
       throw new Error(response.statusText);
     })
     .then((responseJson) => {
-      isLoading();
+      renderSpinner();
       renderArtistEvents(responseJson._embedded, artistName);
     })
     .catch((er: string): void => {
       $('.artist-data').hide();
       // hiding the  data ,since albums takes longer to fetch  they were rendering after the function was done
       // added a settimeout inside the function
-      isLoading();
+      renderSpinner();
       errorMessage();
     });
 }
@@ -191,7 +161,7 @@ function formatBioText(text: string): string {
 function renderArtistAlbums(albums: Albums[], artistName: string): void {
   $('.artist-details').fadeIn();
   if (!albums) {
-    isLoading();
+    renderSpinner();
     $('.albums-container').css('display', 'block');
     notResultsFound(
       $('.albums-container'),
@@ -226,7 +196,7 @@ function renderArtistEvents(allEvents: AllEvents, artistName: string): void {
   $('.events-container ul').empty();
 
   if (!allEvents) {
-    isLoading();
+    renderSpinner();
     notResultsFound(
       $('.events-container'),
       `${artistName} has no upcoming events`
@@ -291,7 +261,7 @@ function notResultsFound(parentElement: JQuery, errMessage: String): void {
   $('.artist-data').show();
   parentElement.children('.no-results-found').remove();
   // removing in case  there was elements before
-  isLoading();
+  renderSpinner();
   const notFoundImg = parentElement.hasClass('artist-info')
     ? './assets/not-found.svg'
     : './assets/no-data.svg';

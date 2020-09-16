@@ -14,47 +14,49 @@ System.register("config", [], function (exports_1, context_1) {
         }
     };
 });
-System.register("main", ["jquery", "config"], function (exports_2, context_2) {
+System.register("interfaces", [], function (exports_2, context_2) {
+    "use strict";
+    var __moduleName = context_2 && context_2.id;
+    return {
+        setters: [],
+        execute: function () {
+        }
+    };
+});
+System.register("main", ["jquery", "config"], function (exports_3, context_3) {
     "use strict";
     var config_1;
-    var __moduleName = context_2 && context_2.id;
-    // =========================== //
+    var __moduleName = context_3 && context_3.id;
     function watchForm() {
         $('form').on('submit', function (event) {
             event.preventDefault();
             var input = $('input');
             var artistName = input.val();
-            // artistName is giving me a warning for undefiend values
             if (artistName.trim() === '') {
-                $('input').val('');
+                input.val('');
                 alert('input cant be empty');
             }
             else {
                 $('.artist-details').fadeIn();
                 $('.landing').hide();
-                isLoading();
-                // sets loading to show when fetching information
+                renderSpinner();
                 showHideAlbumsOrEvents();
                 fetchArtistInfo(artistName);
                 $('input').val('');
-                // sets input value back to empty
             }
         });
     }
-    function isLoading() {
+    function renderSpinner() {
         $('.nav ul li').removeClass('selected-view');
         $('.albums').addClass('selected-view');
         $('.loader').toggleClass('hide-content');
         $('.albums-container').show();
         $('.events-container').hide();
         $('footer').toggleClass('hide-content');
-        // hiding footer so it wont show while content is loading ,
-        //   shows or hide loader-spinner
     }
     function fetchArtistInfo(artistName) {
         var url = config_1.default.audiodbArtistBaseURL + artistName;
         $('.artist-details').find('.error-message').remove();
-        // clear message if there is an attempt after a request failure
         $('.artist-details').hide();
         $('.nav').hide();
         fetch(url)
@@ -68,7 +70,7 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
             renderArtistInfo(JsonResponse.artists, artistName);
         })
             .catch(function (err) {
-            isLoading();
+            renderSpinner();
             errorMessage();
         });
     }
@@ -86,7 +88,6 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
             var sortedAlbums = JsonResponse.album.sort(function (a, b) {
                 return parseInt(a.intYearReleased) - parseInt(b.intYearReleased);
             });
-            //  sorting albums from old-new
             renderArtistAlbums(sortedAlbums, artistName);
         })
             .catch(function (err) {
@@ -104,14 +105,12 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
             throw new Error(response.statusText);
         })
             .then(function (responseJson) {
-            isLoading();
+            renderSpinner();
             renderArtistEvents(responseJson._embedded, artistName);
         })
             .catch(function (er) {
             $('.artist-data').hide();
-            // hiding the  data ,since albums takes longer to fetch  they were rendering after the function was done
-            // added a settimeout inside the function
-            isLoading();
+            renderSpinner();
             errorMessage();
         });
     }
@@ -119,7 +118,6 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
         if (!artist) {
             $('.artist-details').show();
             $('.artist-info').css('height', '76vh');
-            // this  css makes the footer to stay in the bottom if there is no data to render
             $('.artist-data').empty();
             $('.nav').hide();
             notResultsFound($('.artist-info'), "We could not find information about " + artistName);
@@ -135,7 +133,6 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
             fetchArtistEvent(artist[0].strArtist);
         }
     }
-    // reducing the text characters count , api sometimes sends text too large
     function formatBioText(text) {
         var firstIndex = text.indexOf('.');
         var secondIndex = text.indexOf('.', firstIndex + 1);
@@ -144,7 +141,7 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
     function renderArtistAlbums(albums, artistName) {
         $('.artist-details').fadeIn();
         if (!albums) {
-            isLoading();
+            renderSpinner();
             $('.albums-container').css('display', 'block');
             notResultsFound($('.albums-container'), artistName + " has no albums to show");
         }
@@ -162,7 +159,7 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
     function renderArtistEvents(allEvents, artistName) {
         $('.events-container ul').empty();
         if (!allEvents) {
-            isLoading();
+            renderSpinner();
             notResultsFound($('.events-container'), artistName + " has no upcoming events");
         }
         else {
@@ -170,13 +167,11 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
             var events = allEvents.events;
             for (var i = 0; i < events.length; i++) {
                 var _a = events[i], dates = _a.dates, name_1 = _a.name, url = _a.url, _embedded = _a._embedded, images = _a.images;
-                // checks if properties are present in event obejct
                 if (_embedded && name_1 && url && dates) {
                     var highQualityImg = images.find(function (img) { return img.width > 500; });
                     var imgUrl = highQualityImg
                         ? highQualityImg.url
                         : './assets/img-placeholder.webp';
-                    // place holder img in case img is not found
                     var date = formatDate(dates.start.localDate);
                     var liElement = "\n                <li>\n                    <img src=" + imgUrl + " alt=\"" + name_1 + "\">\n                        <p>" + name_1 + "</p>\n                        <p><a href=" + url + " target=\"_blank\">Buy Tickets</a></p>\n                        <p>" + (_embedded.venues[0].name || 'N/A') + " </p>\n                        <p>\n                        <span> " + (_embedded.venues[0].city.name || 'N/A') + "</span>\n                        <span> " + (_embedded.venues[0].country.name || 'N/A') + "</span>\n                        </p>\n                     <p> Date: " + date + " </p>\n                     <p> Status:" + dates.status.code + " </p>\n  \n                </li>\n                ";
                     $('.events-container ul').append(liElement);
@@ -206,8 +201,7 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
     function notResultsFound(parentElement, errMessage) {
         $('.artist-data').show();
         parentElement.children('.no-results-found').remove();
-        // removing in case  there was elements before
-        isLoading();
+        renderSpinner();
         var notFoundImg = parentElement.hasClass('artist-info')
             ? './assets/not-found.svg'
             : './assets/no-data.svg';
@@ -237,12 +231,13 @@ System.register("main", ["jquery", "config"], function (exports_2, context_2) {
         }
     };
 });
-System.register("screenshots/interfaces", [], function (exports_3, context_3) {
+System.register("screenshots/interfaces", [], function (exports_4, context_4) {
     "use strict";
-    var __moduleName = context_3 && context_3.id;
+    var __moduleName = context_4 && context_4.id;
     return {
         setters: [],
         execute: function () {
         }
     };
 });
+//# sourceMappingURL=main.js.map
