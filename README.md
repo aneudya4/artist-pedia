@@ -33,6 +33,8 @@ Artist events view
 - CSS
 - JavaScript
 - Jquery
+- TypeScript
+- Webpack
 - Font-Awesome
 - Google Fonts
 
