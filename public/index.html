@@ -67,22 +67,11 @@
         ><i class="fab fa-github-square"></i
       ></a>
     </footer>
-    <script src="./node_modules/systemjs/dist/system.js"></script>
     <script
       src="https://kit.fontawesome.com/4fbeabb42e.js"
       crossorigin="anonymous"
     ></script>
 
-    <script>
-      SystemJS.config({
-        baseURL: '/',
-        map: {
-          jquery: 'node_modules/jquery/dist/jquery.min.js',
-        },
-        defaultJSExtensions: true,
-      });
-
-      SystemJS.import('main.js');
-    </script>
+    <script src="./bundle.js"></script>
   </body>
 </html>

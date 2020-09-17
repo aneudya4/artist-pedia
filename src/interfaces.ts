@@ -27,4 +27,6 @@ export interface Events {
   images: any;
 }
 
+const mmg = 'mmg';
+
 // need to declare types for this properties

@@ -1,5 +1,6 @@
 import 'jquery';
 import config from './config';
+
 import { Artist, Albums, AllEvents } from './interfaces';
 function watchForm(): void {
   $('form').on('submit', (event: Event) => {
