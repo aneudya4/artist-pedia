@@ -4,3 +4,4 @@ var config = {
     audiodbAlbumsBaseURL: 'https://theaudiodb.com/api/v1/json/1/searchalbum.php?s=',
 };
 export default config;
+//# sourceMappingURL=config.js.map
