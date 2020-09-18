@@ -2,7 +2,12 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+  mode: 'development',
+  devtool: 'inline-source-map',
   entry: './src/main.ts',
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+  },
   module: {
     rules: [
       {
@@ -33,8 +38,5 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
   },
 };

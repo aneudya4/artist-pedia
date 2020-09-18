@@ -7,7 +7,6 @@ function watchForm(): void {
     event.preventDefault();
     const input: JQuery<HTMLInputElement> = $('input');
     const artistName: string = <string>input.val();
-    // artistName is giving me a warning for undefiend values
     if (artistName.trim() === '') {
       input.val('');
       alert('input cant be empty');
@@ -31,6 +30,7 @@ function renderSpinner(): void {
   $('.albums-container').show();
   $('.events-container').hide();
   $('footer').toggleClass('hide-content');
+
   // hiding footer so it wont show while content is loading ,
 
   //   shows or hide loader-spinner
