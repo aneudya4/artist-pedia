@@ -2,7 +2,6 @@ import 'jquery';
 import config from './config';
 
 import { Artist, Albums, AllEvents, Images } from './interfaces';
-
 const watchForm = function (): void {
   $('form').on('submit', (event: Event) => {
     event.preventDefault();
