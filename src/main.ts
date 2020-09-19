@@ -1,7 +1,7 @@
 import 'jquery';
 import config from './config';
 
-import { Artist, Albums, AllEvents } from './interfaces';
+import { Artist, Albums, AllEvents, Images } from './interfaces';
 function watchForm(): void {
   $('form').on('submit', (event: Event) => {
     event.preventDefault();
@@ -56,13 +56,13 @@ function fetchArtistInfo(artistName: string): void {
     })
     .catch((err: string) => {
       renderSpinner();
-      errorMessage();
+      errorMessage(err);
     });
 }
 
 function fetchArtistAlbums(artistName: string): void {
   $('.artist-details').hide();
-  const url = config.audiodbAlbumsBaseURL + artistName;
+  const url: string = config.audiodbAlbumsBaseURL + artistName;
   fetch(url)
     .then((response) => {
       if (response.ok) {
@@ -79,7 +79,7 @@ function fetchArtistAlbums(artistName: string): void {
       renderArtistAlbums(sortedAlbums, artistName);
     })
     .catch((err: string) => {
-      errorMessage();
+      errorMessage(err);
     });
 }
 
@@ -98,12 +98,12 @@ function fetchArtistEvent(artistName: string): void {
       renderSpinner();
       renderArtistEvents(responseJson._embedded, artistName);
     })
-    .catch((er: string): void => {
+    .catch((err: string): void => {
       $('.artist-data').hide();
       // hiding the  data ,since albums takes longer to fetch  they were rendering after the function was done
       // added a settimeout inside the function
       renderSpinner();
-      errorMessage();
+      errorMessage(err);
     });
 }
 
@@ -195,8 +195,8 @@ function renderArtistAlbums(albums: Albums[], artistName: string): void {
 
 function renderArtistEvents(allEvents: AllEvents, artistName: string): void {
   $('.events-container ul').empty();
-
   if (!allEvents) {
+    console;
     renderSpinner();
     notResultsFound(
       $('.events-container'),
@@ -209,12 +209,14 @@ function renderArtistEvents(allEvents: AllEvents, artistName: string): void {
       const { dates, name, url, _embedded, images } = events[i];
       // checks if properties are present in event obejct
       if (_embedded && name && url && dates) {
-        const highQualityImg = images.find((img: any) => img.width > 500);
-        const imgUrl = highQualityImg
+        const highQualityImg = <Images>(
+          images.find((img: Images) => img.width > 500)
+        );
+        const imgUrl: string = highQualityImg
           ? highQualityImg.url
           : './assets/img-placeholder.webp';
         // place holder img in case img is not found
-        const date = formatDate(dates.start.localDate);
+        const date: string = formatDate(dates.start.localDate);
         const liElement = `
                 <li>
                     <img src=${imgUrl} alt="${name}">
@@ -239,7 +241,7 @@ function renderArtistEvents(allEvents: AllEvents, artistName: string): void {
 }
 
 function formatDate(date: string): string {
-  const dateArr = date.split('-');
+  const dateArr: string[] = date.split('-');
   const newDateFormat = `${dateArr[1]}/${dateArr[2]}/${dateArr[0]}`;
   return newDateFormat;
 }
@@ -258,12 +260,12 @@ function showHideAlbumsOrEvents(): void {
   });
 }
 
-function notResultsFound(parentElement: JQuery, errMessage: String): void {
+function notResultsFound(parentElement: JQuery, errMessage: string): void {
   $('.artist-data').show();
   parentElement.children('.no-results-found').remove();
   // removing in case  there was elements before
   renderSpinner();
-  const notFoundImg = parentElement.hasClass('artist-info')
+  const notFoundImg: string = parentElement.hasClass('artist-info')
     ? './assets/not-found.svg'
     : './assets/no-data.svg';
 
@@ -273,9 +275,9 @@ function notResultsFound(parentElement: JQuery, errMessage: String): void {
       </div>`);
 }
 
-function errorMessage(): void {
+function errorMessage(err: string): void {
   $('.nav').hide();
-
+  console.error(err);
   setTimeout(() => {
     $('.artist-details').find('.error-message').remove();
     $('.artist-info').css('height', 'auto');

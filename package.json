@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server ",
-    "build": "webpack"
+    "build": "webpack",
+    "lint": "eslint --ext .js,.ts"
   },
   "repository": {
     "type": "git",
@@ -20,14 +21,20 @@
   },
   "homepage": "https://github.com/aneudya4/artist-pedia#readme",
   "dependencies": {
+    "eslint-config-airbnb-typescript": "^10.0.0",
     "jquery": "^3.5.1"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.1",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
     "expose-loader": "^1.0.0",
     "lite-server": "^2.5.4",
     "ts-loader": "^8.0.3",
-    "typescript": "^4.0.2",
+    "typescript": "^4.0.3",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   }
