@@ -1,6 +1,6 @@
 import 'jquery';
 import config from './config';
-function watchForm() {
+var watchForm = function () {
     $('form').on('submit', function (event) {
         event.preventDefault();
         var input = $('input');
@@ -18,16 +18,16 @@ function watchForm() {
             $('input').val('');
         }
     });
-}
-function renderSpinner() {
+};
+var renderSpinner = function () {
     $('.nav ul li').removeClass('selected-view');
     $('.albums').addClass('selected-view');
     $('.loader').toggleClass('hide-content');
     $('.albums-container').show();
     $('.events-container').hide();
     $('footer').toggleClass('hide-content');
-}
-function fetchArtistInfo(artistName) {
+};
+var fetchArtistInfo = function (artistName) {
     var url = config.audiodbArtistBaseURL + artistName;
     $('.artist-details').find('.error-message').remove();
     $('.artist-details').hide();
@@ -45,8 +45,8 @@ function fetchArtistInfo(artistName) {
         renderSpinner();
         errorMessage(err);
     });
-}
-function fetchArtistAlbums(artistName) {
+};
+var fetchArtistAlbums = function (artistName) {
     $('.artist-details').hide();
     var url = config.audiodbAlbumsBaseURL + artistName;
     fetch(url)
@@ -64,8 +64,8 @@ function fetchArtistAlbums(artistName) {
     })["catch"](function (err) {
         errorMessage(err);
     });
-}
-function fetchArtistEvent(artistName) {
+};
+var fetchArtistEvent = function (artistName) {
     $('.artist-details').hide();
     var url = config.ticketMasterBaseURL + artistName;
     fetch(url)
@@ -83,8 +83,8 @@ function fetchArtistEvent(artistName) {
         renderSpinner();
         errorMessage(err);
     });
-}
-function renderArtistInfo(artist, artistName) {
+};
+var renderArtistInfo = function (artist, artistName) {
     if (!artist) {
         $('.artist-details').show();
         $('.artist-info').css('height', '76vh');
@@ -102,13 +102,13 @@ function renderArtistInfo(artist, artistName) {
         fetchArtistAlbums(artist[0].strArtist);
         fetchArtistEvent(artist[0].strArtist);
     }
-}
-function formatBioText(text) {
+};
+var formatBioText = function (text) {
     var firstIndex = text.indexOf('.');
     var secondIndex = text.indexOf('.', firstIndex + 1);
     return text.substring(0, secondIndex + 1);
-}
-function renderArtistAlbums(albums, artistName) {
+};
+var renderArtistAlbums = function (albums, artistName) {
     $('.artist-details').fadeIn();
     if (!albums) {
         renderSpinner();
@@ -125,11 +125,10 @@ function renderArtistAlbums(albums, artistName) {
             $('.albums-container').append(albumElement);
         }
     }
-}
-function renderArtistEvents(allEvents, artistName) {
+};
+var renderArtistEvents = function (allEvents, artistName) {
     $('.events-container ul').empty();
     if (!allEvents) {
-        console;
         renderSpinner();
         notResultsFound($('.events-container'), artistName + " has no upcoming events");
     }
@@ -138,7 +137,7 @@ function renderArtistEvents(allEvents, artistName) {
         var events = allEvents.events;
         for (var i = 0; i < events.length; i++) {
             var _a = events[i], dates = _a.dates, name_1 = _a.name, url = _a.url, _embedded = _a._embedded, images = _a.images;
-            if (_embedded && name_1 && url && dates) {
+            if (_embedded && name_1 && url && dates && images) {
                 var highQualityImg = (images.find(function (img) { return img.width > 500; }));
                 var imgUrl = highQualityImg
                     ? highQualityImg.url
@@ -149,13 +148,13 @@ function renderArtistEvents(allEvents, artistName) {
             }
         }
     }
-}
-function formatDate(date) {
+};
+var formatDate = function (date) {
     var dateArr = date.split('-');
     var newDateFormat = dateArr[1] + "/" + dateArr[2] + "/" + dateArr[0];
     return newDateFormat;
-}
-function showHideAlbumsOrEvents() {
+};
+var showHideAlbumsOrEvents = function () {
     $('.nav ul li').on('click', function () {
         $('.nav ul li').removeClass('selected-view');
         $(this).addClass('selected-view');
@@ -168,8 +167,8 @@ function showHideAlbumsOrEvents() {
             $('.events-container').fadeOut();
         }
     });
-}
-function notResultsFound(parentElement, errMessage) {
+};
+var notResultsFound = function (parentElement, errMessage) {
     $('.artist-data').show();
     parentElement.children('.no-results-found').remove();
     renderSpinner();
@@ -177,8 +176,8 @@ function notResultsFound(parentElement, errMessage) {
         ? './assets/not-found.svg'
         : './assets/no-data.svg';
     parentElement.append("<div class='no-results-found'>\n          <p>" + errMessage + "</p>\n          <img src=" + notFoundImg + ">\n      </div>");
-}
-function errorMessage(err) {
+};
+var errorMessage = function (err) {
     $('.nav').hide();
     console.error(err);
     setTimeout(function () {
@@ -189,5 +188,5 @@ function errorMessage(err) {
         $('.nav').hide();
         $('.artist-details').append("\n        <div class='error-message'>\n        <p>Something went wrong ,please try again later!</p>\n        <img src='./assets/error_message.svg' alt='error message'>\n        </div>\n        ");
     }, 1500);
-}
+};
 $(watchForm);

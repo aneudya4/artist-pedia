@@ -2,7 +2,8 @@ import 'jquery';
 import config from './config';
 
 import { Artist, Albums, AllEvents, Images } from './interfaces';
-function watchForm(): void {
+
+const watchForm = function (): void {
   $('form').on('submit', (event: Event) => {
     event.preventDefault();
     const input: JQuery<HTMLInputElement> = $('input');
@@ -21,9 +22,9 @@ function watchForm(): void {
       // sets input value back to empty
     }
   });
-}
+};
 
-function renderSpinner(): void {
+const renderSpinner = function (): void {
   $('.nav ul li').removeClass('selected-view');
   $('.albums').addClass('selected-view');
   $('.loader').toggleClass('hide-content');
@@ -34,9 +35,9 @@ function renderSpinner(): void {
   // hiding footer so it wont show while content is loading ,
 
   //   shows or hide loader-spinner
-}
+};
 
-function fetchArtistInfo(artistName: string): void {
+const fetchArtistInfo = function (artistName: string): void {
   const url: string = config.audiodbArtistBaseURL + artistName;
   $('.artist-details').find('.error-message').remove();
   // clear message if there is an attempt after a request failure
@@ -58,9 +59,9 @@ function fetchArtistInfo(artistName: string): void {
       renderSpinner();
       errorMessage(err);
     });
-}
+};
 
-function fetchArtistAlbums(artistName: string): void {
+const fetchArtistAlbums = function (artistName: string): void {
   $('.artist-details').hide();
   const url: string = config.audiodbAlbumsBaseURL + artistName;
   fetch(url)
@@ -81,9 +82,9 @@ function fetchArtistAlbums(artistName: string): void {
     .catch((err: string) => {
       errorMessage(err);
     });
-}
+};
 
-function fetchArtistEvent(artistName: string): void {
+const fetchArtistEvent = function (artistName: string): void {
   $('.artist-details').hide();
   const url: string = config.ticketMasterBaseURL + artistName;
 
@@ -105,9 +106,9 @@ function fetchArtistEvent(artistName: string): void {
       renderSpinner();
       errorMessage(err);
     });
-}
+};
 
-function renderArtistInfo(artist: Artist[], artistName: string): void {
+const renderArtistInfo = function (artist: Artist[], artistName: string): void {
   if (!artist) {
     $('.artist-details').show();
 
@@ -124,7 +125,7 @@ function renderArtistInfo(artist: Artist[], artistName: string): void {
     $('.nav').show();
     $('.artist-info').css('height', 'auto');
 
-    const bio = formatBioText(artist[0].strBiographyEN);
+    const bio: string = formatBioText(artist[0].strBiographyEN);
     const artistData = `
            <div class='img-container'>
               <img src=${artist[0].strArtistThumb} alt="${artist[0].strArtist}">
@@ -150,16 +151,19 @@ function renderArtistInfo(artist: Artist[], artistName: string): void {
     fetchArtistAlbums(artist[0].strArtist);
     fetchArtistEvent(artist[0].strArtist);
   }
-}
+};
 
 // reducing the text characters count , api sometimes sends text too large
-function formatBioText(text: string): string {
+const formatBioText = function (text: string): string {
   const firstIndex = text.indexOf('.');
   const secondIndex = text.indexOf('.', firstIndex + 1);
   return text.substring(0, secondIndex + 1);
-}
+};
 
-function renderArtistAlbums(albums: Albums[], artistName: string): void {
+const renderArtistAlbums = function (
+  albums: Albums[],
+  artistName: string
+): void {
   $('.artist-details').fadeIn();
   if (!albums) {
     renderSpinner();
@@ -191,12 +195,14 @@ function renderArtistAlbums(albums: Albums[], artistName: string): void {
       $('.albums-container').append(albumElement);
     }
   }
-}
+};
 
-function renderArtistEvents(allEvents: AllEvents, artistName: string): void {
+const renderArtistEvents = function (
+  allEvents: AllEvents,
+  artistName: string
+): void {
   $('.events-container ul').empty();
   if (!allEvents) {
-    console;
     renderSpinner();
     notResultsFound(
       $('.events-container'),
@@ -208,7 +214,7 @@ function renderArtistEvents(allEvents: AllEvents, artistName: string): void {
     for (let i = 0; i < events.length; i++) {
       const { dates, name, url, _embedded, images } = events[i];
       // checks if properties are present in event obejct
-      if (_embedded && name && url && dates) {
+      if (_embedded && name && url && dates && images) {
         const highQualityImg = <Images>(
           images.find((img: Images) => img.width > 500)
         );
@@ -238,15 +244,15 @@ function renderArtistEvents(allEvents: AllEvents, artistName: string): void {
       }
     }
   }
-}
+};
 
-function formatDate(date: string): string {
+const formatDate = function (date: string): string {
   const dateArr: string[] = date.split('-');
   const newDateFormat = `${dateArr[1]}/${dateArr[2]}/${dateArr[0]}`;
   return newDateFormat;
-}
+};
 
-function showHideAlbumsOrEvents(): void {
+const showHideAlbumsOrEvents = function (): void {
   $('.nav ul li').on('click', function () {
     $('.nav ul li').removeClass('selected-view');
     $(this).addClass('selected-view');
@@ -258,9 +264,12 @@ function showHideAlbumsOrEvents(): void {
       $('.events-container').fadeOut();
     }
   });
-}
+};
 
-function notResultsFound(parentElement: JQuery, errMessage: string): void {
+const notResultsFound = function (
+  parentElement: JQuery,
+  errMessage: string
+): void {
   $('.artist-data').show();
   parentElement.children('.no-results-found').remove();
   // removing in case  there was elements before
@@ -273,9 +282,9 @@ function notResultsFound(parentElement: JQuery, errMessage: string): void {
           <p>${errMessage}</p>
           <img src=${notFoundImg}>
       </div>`);
-}
+};
 
-function errorMessage(err: string): void {
+const errorMessage = function (err: string): void {
   $('.nav').hide();
   console.error(err);
   setTimeout(() => {
@@ -291,6 +300,6 @@ function errorMessage(err: string): void {
         </div>
         `);
   }, 1500);
-}
+};
 
 $(watchForm);

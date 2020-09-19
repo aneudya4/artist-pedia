@@ -24,7 +24,7 @@ export interface Events {
   name: string;
   url: string;
   _embedded: Embedded;
-  images: Images[];
+  images?: Images[];
 }
 
 export interface Dates {
