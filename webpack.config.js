@@ -2,8 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
+  mode: 'production',
+  devtool: 'source-map',
   entry: './src/main.ts',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
