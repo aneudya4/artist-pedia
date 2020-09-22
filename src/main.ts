@@ -296,7 +296,7 @@ const errorMessage = function (err: string): void {
     $('.artist-details').append(`
         <div class='error-message'>
         <p>Something went wrong ,please try again later!</p>
-        <img src='./assets/error_message.svg' alt='error message'>
+        <img src='./public/assets/error_message.svg' alt='error message'>
         </div>
         `);
   }, 1500);
