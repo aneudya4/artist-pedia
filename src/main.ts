@@ -1,7 +1,7 @@
 import 'jquery';
 import config from './config';
-
 import { Artist, Albums, AllEvents, Images } from './interfaces';
+
 const watchForm = function (): void {
   $('form').on('submit', (event: Event) => {
     event.preventDefault();
@@ -174,7 +174,8 @@ const renderArtistAlbums = function (
   } else {
     $('.albums-container').empty();
     for (let i = 0; i < albums.length; i++) {
-      const img = albums[i].strAlbumThumb || './assets/img-placeholder.webp';
+      const img =
+        albums[i].strAlbumThumb || './public/assets/img-placeholder.webp';
       const albumElement = `
              <div class='album-img'>
                 <img src=${img} alt="${albums[i].strArtist}">
@@ -219,7 +220,7 @@ const renderArtistEvents = function (
         );
         const imgUrl: string = highQualityImg
           ? highQualityImg.url
-          : './assets/img-placeholder.webp';
+          : './public/assets/img-placeholder.webp';
         // place holder img in case img is not found
         const date: string = formatDate(dates.start.localDate);
         const liElement = `
@@ -274,8 +275,8 @@ const notResultsFound = function (
   // removing in case  there was elements before
   renderSpinner();
   const notFoundImg: string = parentElement.hasClass('artist-info')
-    ? './assets/not-found.svg'
-    : './assets/no-data.svg';
+    ? './public/assets/not-found.svg'
+    : './public/assets/no-data.svg';
 
   parentElement.append(`<div class='no-results-found'>
           <p>${errMessage}</p>
