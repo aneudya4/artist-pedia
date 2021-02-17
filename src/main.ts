@@ -7,6 +7,7 @@ import {
   renderArtistEvents,
   renderAlbumsOrEvents,
 } from './renderers';
+
 import config from './config';
 
 const watchForm = function (): void {

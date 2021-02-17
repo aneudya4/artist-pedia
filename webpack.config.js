@@ -13,6 +13,8 @@ module.exports = {
       {
         test: /\.ts$/,
         include: [path.resolve(__dirname, 'src')],
+        exclude: [path.resolve(__dirname, 'src/api_keys.js')],
+
         use: 'ts-loader',
       },
       {
