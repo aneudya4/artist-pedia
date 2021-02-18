@@ -2,7 +2,6 @@
 // @ts-ignore
 import { API_KEYS } from './api_key.js';
 
-
 const config = {
   ticketMasterBaseURL:
     `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${API_KEYS.ticketMasterKEY}&keyword=`,
